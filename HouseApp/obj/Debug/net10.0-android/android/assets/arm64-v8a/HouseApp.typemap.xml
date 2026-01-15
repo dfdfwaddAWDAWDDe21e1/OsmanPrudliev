@@ -1,0 +1,10 @@
+<api type="debug" assembly-name="HouseApp" mvid="e5c0f2734de5420e9a74131848e65c88">
+  <java-to-managed>
+    <entry java-name="crc64bd7f1bd6094c7db2/MainActivity" managed-name="HouseApp.MainActivity, HouseApp" managed-type-token-id="33554440" />
+    <entry java-name="crc64bd7f1bd6094c7db2/MainApplication" managed-name="HouseApp.MainApplication, HouseApp" managed-type-token-id="33554441" />
+  </java-to-managed>
+  <managed-to-java>
+    <entry java-name="crc64bd7f1bd6094c7db2/MainActivity" managed-name="HouseApp.MainActivity, HouseApp" managed-type-token-id="33554440" />
+    <entry java-name="crc64bd7f1bd6094c7db2/MainApplication" managed-name="HouseApp.MainApplication, HouseApp" managed-type-token-id="33554441" />
+  </managed-to-java>
+</api>

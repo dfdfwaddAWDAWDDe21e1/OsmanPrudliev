@@ -1,0 +1,207 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\views\\profilepage.xaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\views\\profilepage.xaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\views\\chatpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\views\\chatpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\views\\calendarpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\views\\calendarpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\views\\homepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\views\\homepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\resources\\images\\profile.svg||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\resources\\images\\profile.svg||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\views\\profilepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\views\\profilepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\views\\chatpage.xaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\views\\chatpage.xaml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\views\\chatpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\views\\chatpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\petti\\.nuget\\packages\\microsoft.maui.resizetizer\\10.0.1\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|c:\\users\\petti\\downloads\\houseapp_fixed_clean\\houseapp\\houseapp\\resources\\images\\chat.svg||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{30E6A9EE-07EF-2586-2B69-150674741AC8}|HouseApp\\HouseApp.csproj|solutionrelative:houseapp\\resources\\images\\chat.svg||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProfilePage.xaml",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ProfilePage.xaml",
+              "RelativeDocumentMoniker": "HouseApp\\Views\\ProfilePage.xaml",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ProfilePage.xaml",
+              "RelativeToolTip": "HouseApp\\Views\\ProfilePage.xaml",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAIwKkAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-12T22:31:45.775Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChatPage.xaml",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ChatPage.xaml",
+              "RelativeDocumentMoniker": "HouseApp\\Views\\ChatPage.xaml",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ChatPage.xaml",
+              "RelativeToolTip": "HouseApp\\Views\\ChatPage.xaml",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAIwGgAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-12T22:30:46.937Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CalendarPage.xaml",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\CalendarPage.xaml",
+              "RelativeDocumentMoniker": "HouseApp\\Views\\CalendarPage.xaml",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\CalendarPage.xaml",
+              "RelativeToolTip": "HouseApp\\Views\\CalendarPage.xaml",
+              "ViewState": "AgIAAFEAAAAAAAAAAAArwF0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-12T22:30:02.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomePage.xaml",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\HomePage.xaml",
+              "RelativeDocumentMoniker": "HouseApp\\Views\\HomePage.xaml",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\HomePage.xaml",
+              "RelativeToolTip": "HouseApp\\Views\\HomePage.xaml",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAkwI0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-12T22:28:08.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "profile.svg",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Resources\\Images\\profile.svg",
+              "RelativeDocumentMoniker": "HouseApp\\Resources\\Images\\profile.svg",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Resources\\Images\\profile.svg",
+              "RelativeToolTip": "HouseApp\\Resources\\Images\\profile.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQESURBVDhPrZRdbJNVHMZ/b/u26xfUbqPYbd2wIKxsbGDYpk6joISJCuIHRkyMVxpDNBpjQjDRZFfeaFiI3ojGS00MshgvIEQkYyTAnJMs4yPb2Nqt27p17d5\u002B0L7v23O8WDc28JIneXK\u002B/ufJ\u002BZ/znD88SEgplXvnurq6jjc2Nn5UWkdKuRQLgBCCfD5PNpvtPnr06JFoNBpbrXAPurq6hoQQolgs/i9N0xQDAwOir69PnDhx4tdwOLxl5X7rygFAR0fHkba2tkohwdRTiNw1lMwP6DM/Y0z9AcDwhMHOljacTmfIbrfXTE5OXkskEon7BO2tbyr1za1HbuTKKm9N9rLW/A7nzPeYsbOgbEHIIGb8EtFZqNvcis/nU10u16by8vLg9evXL6bT6fSioKLgfmy/r/bF975cE6h9viVss\u002B9efxzv9BkGRrfzm/YxI2WH2da8DzE7RMZwc7F/jP7\u002BfjRNs/p8vvCFCxd\u002BSaVSMRXA0bjXW3fgw8\u002Be21nz/mvbRlw7xeckbubozR7jVugVorqTSyPTZI0xXvc3UN\u002B8kRr86LqOx\u002BNhcHBwOUsLgL/jg/a28Lq3DzVcXtuS\u002B1RZGMgzqXSSW3cQWxbchknthiquzhbpST6CsqaWysoKAoEAXq8Xq9W67AILQF3Ac/Dl\u002BqGKJuMbZa7PwNX0E9seP8ihHQHeaqokMzWLz16G4nbSl7Axl7eUziNhhbUAVICt61JPP\u002BH90ZkZdfCt8QUTf9kwzH8RUiIR5IsqFaoFm93G6GyBZFqnaq0DKQHlrkcB1KqAan\u002B36UyNLTKinLd8Jd0te5SQtLAYTUlUYtzR0XWDgmliSllalsh7PoBl4kbtgc3i97IrmcNyqGJv8cqlm1KOjiNGxigO36Y4fBsxfBslOk51YZ5ngx78HntJbPUvAlClFntjZry6cL64CyMrVbfTZmkPVSo7qt14HSpa3uDyWJJIMgdSEvS58DjUpQQW73EF1PxEvj2ZLfuzd1rdWqum6taHqpWzUznO3ppB6gaqXaXoqSBZdDEfn\u002BcFi4LNcrcELKW8BIu5oDj3HSscjk3PfX1zaDQxPpWWunsN1G5A2fQoheo64lIhHk8Qcpi81Lgeu3Xple\u002BH9dg7\u002BJ95OBm62nujpy5gMzIpo17LCPdEfIHEXIo7iXls6QUaHlL5ZNdGyt12UJRlyyiKQiQS4fTp0yc1TYtZN1RxOTbN7rB95pnqeM9goKbZtefJp\u002Br9tiJbvCqtVW72N/h5dXsVDpu6eIySXQAUi4VIJEp3d/dJTdPuL2WdnZ09QghhGEaJujD0RerLLCy3hmGIc\u002BfOiWAw2MKSsVdCSvn3qVOn2kt9pJQIIVYV2pUE0DTtH2B\u002BtdIDwn\u002B7nChdLXVvTAAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-01-12T22:21:13.294Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProfilePage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ProfilePage.xaml.cs",
+              "RelativeDocumentMoniker": "HouseApp\\Views\\ProfilePage.xaml.cs",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ProfilePage.xaml.cs",
+              "RelativeToolTip": "HouseApp\\Views\\ProfilePage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-12T22:20:22.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ChatPage.xaml",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ChatPage.xaml",
+              "RelativeDocumentMoniker": "HouseApp\\Views\\ChatPage.xaml",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ChatPage.xaml",
+              "RelativeToolTip": "HouseApp\\Views\\ChatPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-12T22:14:17.039Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\AppShell.xaml",
+              "RelativeDocumentMoniker": "HouseApp\\AppShell.xaml",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\AppShell.xaml",
+              "RelativeToolTip": "HouseApp\\AppShell.xaml",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAADIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-01-12T22:08:42.884Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "chat.svg",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Resources\\Images\\chat.svg",
+              "RelativeDocumentMoniker": "HouseApp\\Resources\\Images\\chat.svg",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Resources\\Images\\chat.svg",
+              "RelativeToolTip": "HouseApp\\Resources\\Images\\chat.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQESURBVDhPrZRdbJNVHMZ/b/u26xfUbqPYbd2wIKxsbGDYpk6joISJCuIHRkyMVxpDNBpjQjDRZFfeaFiI3ojGS00MshgvIEQkYyTAnJMs4yPb2Nqt27p17d5\u002B0L7v23O8WDc28JIneXK\u002B/ufJ\u002BZ/znD88SEgplXvnurq6jjc2Nn5UWkdKuRQLgBCCfD5PNpvtPnr06JFoNBpbrXAPurq6hoQQolgs/i9N0xQDAwOir69PnDhx4tdwOLxl5X7rygFAR0fHkba2tkohwdRTiNw1lMwP6DM/Y0z9AcDwhMHOljacTmfIbrfXTE5OXkskEon7BO2tbyr1za1HbuTKKm9N9rLW/A7nzPeYsbOgbEHIIGb8EtFZqNvcis/nU10u16by8vLg9evXL6bT6fSioKLgfmy/r/bF975cE6h9viVss\u002B9efxzv9BkGRrfzm/YxI2WH2da8DzE7RMZwc7F/jP7\u002BfjRNs/p8vvCFCxd\u002BSaVSMRXA0bjXW3fgw8\u002Be21nz/mvbRlw7xeckbubozR7jVugVorqTSyPTZI0xXvc3UN\u002B8kRr86LqOx\u002BNhcHBwOUsLgL/jg/a28Lq3DzVcXtuS\u002B1RZGMgzqXSSW3cQWxbchknthiquzhbpST6CsqaWysoKAoEAXq8Xq9W67AILQF3Ac/Dl\u002BqGKJuMbZa7PwNX0E9seP8ihHQHeaqokMzWLz16G4nbSl7Axl7eUziNhhbUAVICt61JPP\u002BH90ZkZdfCt8QUTf9kwzH8RUiIR5IsqFaoFm93G6GyBZFqnaq0DKQHlrkcB1KqAan\u002B36UyNLTKinLd8Jd0te5SQtLAYTUlUYtzR0XWDgmliSllalsh7PoBl4kbtgc3i97IrmcNyqGJv8cqlm1KOjiNGxigO36Y4fBsxfBslOk51YZ5ngx78HntJbPUvAlClFntjZry6cL64CyMrVbfTZmkPVSo7qt14HSpa3uDyWJJIMgdSEvS58DjUpQQW73EF1PxEvj2ZLfuzd1rdWqum6taHqpWzUznO3ppB6gaqXaXoqSBZdDEfn\u002BcFi4LNcrcELKW8BIu5oDj3HSscjk3PfX1zaDQxPpWWunsN1G5A2fQoheo64lIhHk8Qcpi81Lgeu3Xple\u002BH9dg7\u002BJ95OBm62nujpy5gMzIpo17LCPdEfIHEXIo7iXls6QUaHlL5ZNdGyt12UJRlyyiKQiQS4fTp0yc1TYtZN1RxOTbN7rB95pnqeM9goKbZtefJp\u002Br9tiJbvCqtVW72N/h5dXsVDpu6eIySXQAUi4VIJEp3d/dJTdPuL2WdnZ09QghhGEaJujD0RerLLCy3hmGIc\u002BfOiWAw2MKSsVdCSvn3qVOn2kt9pJQIIVYV2pUE0DTtH2B\u002BtdIDwn\u002B7nChdLXVvTAAAAABJRU5ErkJggg==",
+              "WhenOpened": "2026-01-12T22:10:02.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ChatPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ChatPage.xaml.cs",
+              "RelativeDocumentMoniker": "HouseApp\\Views\\ChatPage.xaml.cs",
+              "ToolTip": "C:\\Users\\petti\\Downloads\\HouseApp_fixed_clean\\HouseApp\\HouseApp\\Views\\ChatPage.xaml.cs",
+              "RelativeToolTip": "HouseApp\\Views\\ChatPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-12T22:08:18.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Microsoft.Maui.Resizetizer.After.targets",
+              "DocumentMoniker": "C:\\Users\\petti\\.nuget\\packages\\microsoft.maui.resizetizer\\10.0.1\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\microsoft.maui.resizetizer\\10.0.1\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets",
+              "ToolTip": "C:\\Users\\petti\\.nuget\\packages\\microsoft.maui.resizetizer\\10.0.1\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\microsoft.maui.resizetizer\\10.0.1\\buildTransitive\\Microsoft.Maui.Resizetizer.After.targets",
+              "ViewState": "AgIAAHECAAAAAAAAAAAYwHgCAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-01-12T21:45:03.417Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

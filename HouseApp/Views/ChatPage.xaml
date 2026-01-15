@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HouseApp.Views.ChatPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Chat"
+    BackgroundColor="{StaticResource AppBg}">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="20" RowSpacing="14">
+
+        <!-- Header -->
+        <Frame Grid.Row="0"
+               CornerRadius="18"
+               HasShadow="True"
+               Padding="14"
+               BackgroundColor="{StaticResource CardBg}">
+            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="House Chat"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource TextPrimary}" />
+                    <Label Text="3 members • last message today"
+                           FontSize="12"
+                           TextColor="{StaticResource TextMuted}" />
+                </VerticalStackLayout>
+
+                <!-- Avatars (placeholder) -->
+                <HorizontalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                    <Frame WidthRequest="28" HeightRequest="28" CornerRadius="14"
+                           BackgroundColor="{StaticResource AccentLight}"
+                           BorderColor="{StaticResource AccentBorder}"
+                           HasShadow="False" />
+                    <Frame WidthRequest="28" HeightRequest="28" CornerRadius="14"
+                           BackgroundColor="#F3F4F6"
+                           BorderColor="{StaticResource Border}"
+                           HasShadow="False" />
+                    <Frame WidthRequest="28" HeightRequest="28" CornerRadius="14"
+                           BackgroundColor="#F3F4F6"
+                           BorderColor="{StaticResource Border}"
+                           HasShadow="False" />
+                </HorizontalStackLayout>
+            </Grid>
+        </Frame>
+
+        <!-- Messages (static placeholders) -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="12">
+				
+				<!-- Today separator chip -->
+				<HorizontalStackLayout HorizontalOptions="Center" Margin="0,4,0,2">
+					<Frame CornerRadius="14"
+						   Padding="12,6"
+						   BackgroundColor="{StaticResource AccentLight}"
+						   BorderColor="{StaticResource AccentBorder}"
+						   HasShadow="False">
+						<Label Text="Today"
+							   FontSize="12"
+							   FontAttributes="Bold"
+							   TextColor="{StaticResource Accent}" />
+					</Frame>
+				</HorizontalStackLayout>
+				<!-- Optional extra status chip -->
+				<HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+					<Frame CornerRadius="14"
+						   Padding="12,6"
+						   HasShadow="False"
+						   BackgroundColor="{StaticResource AccentLight}"
+						   BorderColor="{StaticResource AccentBorder}">
+						<Label Text="Today"
+							   FontSize="12"
+							   FontAttributes="Bold"
+							   TextColor="{StaticResource Accent}" />
+					</Frame>
+
+					<Frame CornerRadius="14"
+						   Padding="12,6"
+						   HasShadow="False"
+						   BackgroundColor="#FEF3C7"
+						   BorderColor="#FDE68A">
+						<Label Text="2 new"
+							   FontSize="12"
+							   FontAttributes="Bold"
+							   TextColor="#92400E" />
+					</Frame>
+				</HorizontalStackLayout>
+
+				<!-- Other person message (left) -->
+                <VerticalStackLayout Spacing="4" HorizontalOptions="Start" WidthRequest="320">
+                    <Label Text="Ivo"
+                           FontSize="12"
+                           TextColor="{StaticResource TextMuted}" />
+                    <Frame CornerRadius="16"
+                           Padding="12"
+                           BackgroundColor="{StaticResource CardBg}"
+                           BorderColor="{StaticResource Border}"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Hey, rent is due soon—do we split it this weekend?"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="09:12"
+                                   FontSize="10"
+                                   TextColor="{StaticResource TextMuted}"
+                                   HorizontalOptions="End" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- Your message (right) -->
+                <VerticalStackLayout Spacing="4" HorizontalOptions="End" WidthRequest="320">
+                    <Label Text="You"
+                           FontSize="12"
+                           TextColor="{StaticResource TextMuted}"
+                           HorizontalOptions="End" />
+                    <Frame CornerRadius="16"
+                           Padding="12"
+                           BackgroundColor="{StaticResource AccentLight}"
+                           BorderColor="{StaticResource AccentBorder}"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Yes, works for me. I’ll transfer my part on Saturday."
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="09:13"
+                                   FontSize="10"
+                                   TextColor="{StaticResource TextMuted}"
+                                   HorizontalOptions="End" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- Another left message -->
+                <VerticalStackLayout Spacing="4" HorizontalOptions="Start" WidthRequest="320">
+                    <Label Text="Maria"
+                           FontSize="12"
+                           TextColor="{StaticResource TextMuted}" />
+                    <Frame CornerRadius="16"
+                           Padding="12"
+                           BackgroundColor="{StaticResource CardBg}"
+                           BorderColor="{StaticResource Border}"
+                           HasShadow="False">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Also, can we add a kitchen cleaning chore to the calendar?"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TextPrimary}" />
+                            <Label Text="09:16"
+                                   FontSize="10"
+                                   TextColor="{StaticResource TextMuted}"
+                                   HorizontalOptions="End" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- Spacer so last bubble doesn't hide behind input -->
+                <BoxView HeightRequest="10" Opacity="0" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Input Bar (UI only) -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <Frame CornerRadius="18"
+                   Padding="10"
+                   BackgroundColor="{StaticResource CardBg}"
+                   BorderColor="{StaticResource Border}"
+                   HasShadow="False">
+                <Entry Placeholder="Type a message…"
+                       TextColor="{StaticResource TextPrimary}"
+                       PlaceholderColor="{StaticResource TextMuted}" />
+            </Frame>
+
+            <Frame Grid.Column="1"
+                   WidthRequest="54"
+                   HeightRequest="54"
+                   CornerRadius="18"
+                   BackgroundColor="{StaticResource Accent}"
+                   HasShadow="False">
+                <Label Text="➤"
+                       FontSize="18"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Frame>
+        </Grid>
+
+    </Grid>
+</ContentPage>
