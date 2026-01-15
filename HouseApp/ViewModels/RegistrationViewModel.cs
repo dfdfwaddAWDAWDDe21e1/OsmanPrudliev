@@ -29,6 +29,8 @@ public partial class RegistrationViewModel : ObservableObject
     [ObservableProperty]
     private DateTime dateOfBirth = DateTime.Now.AddYears(-20);
 
+    public DateTime MaximumDateOfBirth => DateTime.Today;
+
     [ObservableProperty]
     private UserType selectedUserType = UserType.Student;
 

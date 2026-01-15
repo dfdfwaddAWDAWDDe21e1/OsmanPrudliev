@@ -157,7 +157,7 @@
                     <DatePicker Date="{Binding DateOfBirth}"
                                 Format="dd MMMM yyyy"
                                 MinimumDate="1940-01-01"
-                                MaximumDate="{x:Static sys:DateTime.Now}"
+                                MaximumDate="{Binding MaximumDateOfBirth}"
                                 TextColor="{StaticResource TextPrimary}"
                                 BackgroundColor="Transparent"
                                 FontSize="16"/>
