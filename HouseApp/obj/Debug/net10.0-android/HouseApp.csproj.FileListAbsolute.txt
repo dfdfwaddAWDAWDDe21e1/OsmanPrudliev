@@ -2692,18 +2692,8 @@ C:/Users/petti/Downloads/HouseApp_fixed_clean/HouseApp/HouseApp/obj/Debug/net10.
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/mauiimage.inputs
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/mauifont.inputs
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/mauisplash.inputs
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-hdpi/splash.png
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-mdpi/splash.png
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-v31/maui_splash_image.xml
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-xhdpi/splash.png
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-xxhdpi/splash.png
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/sp/drawable-xxxhdpi/splash.png
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/sp/drawable/maui_splash_image.xml
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/sp/values/maui_colors.xml
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/mauisplash.stamp
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/mauifont.stamp
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/f/OpenSans-Regular.ttf
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/f/OpenSans-Semibold.ttf
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/r/drawable-xxxhdpi/dotnet_bot.png
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/r/drawable-xxhdpi/dotnet_bot.png
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/r/drawable-xhdpi/dotnet_bot.png
@@ -2759,7 +2749,6 @@ C:/Users/petti/Downloads/HouseApp_fixed_clean/HouseApp/HouseApp/obj/Debug/net10.
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/case_map.txt
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/__Microsoft.Android.Resource.Designer.cs
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/res.flag
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/C4E7330E458A7225-files.cache
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/resizetizer/91CE730081AD4DD6-files.cache
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/lp/98/jl/files.cache
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/lp/101/jl/files.cache
@@ -5395,8 +5384,6 @@ C:/Users/petti/Downloads/HouseApp_fixed_clean/HouseApp/HouseApp/obj/Debug/net10.
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/android/src/mono/MonoPackageManager_Resources.java
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/android/src/net/dot/android/ApplicationRegistration.java
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/assets/AboutAssets.txt
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/assets/OpenSans-Regular.ttf
-/home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/assets/OpenSans-Semibold.ttf
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/android/bin/packaged_resources
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/android/src/com/companyname/houseapp/R.java
 /home/runner/work/OsmanPrudliev/OsmanPrudliev/HouseApp/obj/Debug/net10.0-android/_CompileJava.FileList.txt

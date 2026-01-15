@@ -20,6 +20,9 @@
         <member name="P:HouseApp.ViewModels.ChatViewModel.IsConnected">
             <inheritdoc cref="F:HouseApp.ViewModels.ChatViewModel.isConnected"/>
         </member>
+        <member name="P:HouseApp.ViewModels.ChatViewModel.ConnectionStatus">
+            <inheritdoc cref="F:HouseApp.ViewModels.ChatViewModel.connectionStatus"/>
+        </member>
         <member name="F:HouseApp.ViewModels.ChatViewModel.sendMessageCommand">
             <summary>The backing field for <see cref="P:HouseApp.ViewModels.ChatViewModel.SendMessageCommand"/>.</summary>
         </member>
@@ -302,6 +305,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsConnected">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsConnected" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConnectionStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConnectionStatus" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DayName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DayName" generated properties.</summary>
         </member>
@@ -424,6 +430,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsConnected">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsConnected" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConnectionStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConnectionStatus" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DayName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DayName" generated properties.</summary>

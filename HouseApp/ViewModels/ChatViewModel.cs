@@ -34,7 +34,7 @@ public partial class ChatViewModel : ObservableObject
         _houseService = houseService;
 
         _chatService.MessageReceived += OnMessageReceived;
-        _chatService.ConnectionStatusChanged += OnConnectionStatusChanged;
+        _chatService.ConnectionStatusChanged += HandleConnectionStatusChanged;
     }
 
     public async Task InitializeAsync()
@@ -64,7 +64,7 @@ public partial class ChatViewModel : ObservableObject
         }
     }
 
-    private void OnConnectionStatusChanged(string status)
+    private void HandleConnectionStatusChanged(string status)
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
@@ -101,6 +101,6 @@ public partial class ChatViewModel : ObservableObject
     {
         await _chatService.DisconnectAsync();
         _chatService.MessageReceived -= OnMessageReceived;
-        _chatService.ConnectionStatusChanged -= OnConnectionStatusChanged;
+        _chatService.ConnectionStatusChanged -= HandleConnectionStatusChanged;
     }
 }
