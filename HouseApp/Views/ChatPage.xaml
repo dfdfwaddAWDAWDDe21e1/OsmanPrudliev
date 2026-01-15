@@ -132,17 +132,19 @@
 
         <!-- Input Bar -->
         <Grid Grid.Row="3" ColumnDefinitions="*,Auto" ColumnSpacing="10">
-            <Frame CornerRadius="18"
-                   Padding="10"
-                   BackgroundColor="{StaticResource CardBg}"
-                   BorderColor="{StaticResource Border}"
-                   HasShadow="False">
+            <Border StrokeThickness="1" 
+                    Stroke="#E5E7EB" 
+                    BackgroundColor="White"
+                    Padding="12"
+                    StrokeShape="RoundRectangle 18">
                 <Entry Placeholder="Type a message…"
                        Text="{Binding MessageText}"
-                       TextColor="{StaticResource TextPrimary}"
-                       PlaceholderColor="{StaticResource TextMuted}"
+                       TextColor="#111827"
+                       PlaceholderColor="#9CA3AF"
+                       BackgroundColor="Transparent"
+                       FontSize="16"
                        ReturnCommand="{Binding SendMessageCommand}" />
-            </Frame>
+            </Border>
 
             <Frame Grid.Column="1"
                    WidthRequest="54"
