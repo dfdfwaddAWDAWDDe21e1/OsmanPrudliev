@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HouseApp.Models;
 using HouseApp.Services;
+using HouseApp.DTOs;
 using System.Collections.ObjectModel;
 
 namespace HouseApp.ViewModels;
@@ -27,6 +28,12 @@ public partial class ChatViewModel : ObservableObject
     [ObservableProperty]
     private string connectionStatus = "Connecting...";
 
+    [ObservableProperty]
+    private string houseName = string.Empty;
+
+    [ObservableProperty]
+    private bool isBusy;
+
     public ChatViewModel(ChatService chatService, AuthService authService, HouseService houseService)
     {
         _chatService = chatService;
@@ -41,18 +48,16 @@ public partial class ChatViewModel : ObservableObject
     {
         try
         {
-            var studentId = await _authService.GetCurrentUserIdAsync();
-            var house = await _houseService.GetStudentHouseAsync(studentId);
+            await LoadUserHouse();
             
-            if (house != null)
+            if (CurrentHouseId > 0)
             {
-                CurrentHouseId = house.Id;
                 await _chatService.InitializeAsync(CurrentHouseId);
                 IsConnected = _chatService.IsConnected;
             }
             else
             {
-                ConnectionStatus = "No house assigned";
+                ConnectionStatus = "Not assigned to a house";
                 IsConnected = false;
             }
         }
@@ -61,6 +66,33 @@ public partial class ChatViewModel : ObservableObject
             System.Diagnostics.Debug.WriteLine($"Chat initialization error: {ex.Message}");
             ConnectionStatus = $"Error: {ex.Message}";
             IsConnected = false;
+        }
+    }
+
+    private async Task LoadUserHouse()
+    {
+        try
+        {
+            var userId = int.Parse(await SecureStorage.GetAsync(Constants.UserIdKey) ?? "0");
+            if (userId == 0) return;
+
+            // Get user's house assignment using new endpoint
+            var houseTenant = await _houseService.GetStudentHouseAsync(userId);
+            
+            if (houseTenant != null)
+            {
+                CurrentHouseId = houseTenant.Id;
+                HouseName = houseTenant.Name;
+            }
+            else
+            {
+                ConnectionStatus = "Not assigned to a house";
+                IsConnected = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error loading house: {ex.Message}");
         }
     }
 
@@ -82,18 +114,53 @@ public partial class ChatViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task SendMessageAsync()
+    private async Task SendMessage()
     {
-        if (string.IsNullOrWhiteSpace(MessageText) || !IsConnected) return;
+        if (string.IsNullOrWhiteSpace(MessageText))
+            return;
+
+        if (!_chatService.IsConnected)
+        {
+            await Application.Current!.MainPage!.DisplayAlert(
+                "Error", 
+                "Not connected to chat. Please wait...", 
+                "OK");
+            return;
+        }
+
+        if (CurrentHouseId <= 0)
+        {
+            await Application.Current!.MainPage!.DisplayAlert(
+                "Error", 
+                "You are not assigned to a house yet.", 
+                "OK");
+            return;
+        }
 
         try
         {
-            await _chatService.SendMessageAsync(CurrentHouseId, MessageText);
-            MessageText = string.Empty;
+            IsBusy = true;
+            
+            var message = MessageText;
+            MessageText = string.Empty; // Clear immediately
+            
+            await _chatService.SendMessageAsync(CurrentHouseId, message);
+            
+            // Message will be received via SignalR callback
         }
         catch (Exception ex)
         {
-            await Application.Current!.MainPage!.DisplayAlert("Error", $"Failed to send message: {ex.Message}", "OK");
+            await Application.Current!.MainPage!.DisplayAlert(
+                "Error", 
+                $"Failed to send message: {ex.Message}", 
+                "OK");
+            
+            // Restore message on error
+            MessageText = message;
+        }
+        finally
+        {
+            IsBusy = false;
         }
     }
 

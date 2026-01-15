@@ -1,4 +1,5 @@
 using HouseApp.Models;
+using HouseApp.DTOs;
 
 namespace HouseApp.Services;
 
@@ -24,7 +25,19 @@ public class HouseService
 
     public async Task<House?> GetStudentHouseAsync(int studentId)
     {
-        return await _apiService.GetAsync<House>($"/api/houses/student/{studentId}");
+        var houseTenantDto = await _apiService.GetAsync<HouseTenantDto>($"/api/houses/student/{studentId}/house");
+        
+        if (houseTenantDto != null)
+        {
+            // Convert the DTO to a House object for backward compatibility
+            return new House
+            {
+                Id = houseTenantDto.HouseId,
+                Name = houseTenantDto.HouseName
+            };
+        }
+        
+        return null;
     }
 
     public async Task<List<HouseTenant>> GetHouseTenantsAsync(int houseId)

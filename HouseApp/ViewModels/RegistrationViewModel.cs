@@ -34,6 +34,32 @@ public partial class RegistrationViewModel : ObservableObject
     [ObservableProperty]
     private UserType selectedUserType = UserType.Student;
 
+    private bool _isStudent = true; // Default to Student
+    public bool IsStudent
+    {
+        get => _isStudent;
+        set
+        {
+            if (SetProperty(ref _isStudent, value))
+            {
+                if (value) IsLandlord = false;
+            }
+        }
+    }
+
+    private bool _isLandlord;
+    public bool IsLandlord
+    {
+        get => _isLandlord;
+        set
+        {
+            if (SetProperty(ref _isLandlord, value))
+            {
+                if (value) IsStudent = false;
+            }
+        }
+    }
+
     [ObservableProperty]
     private bool isLoading;
 
@@ -140,7 +166,7 @@ public partial class RegistrationViewModel : ObservableObject
                 LastName = LastName,
                 PhoneNumber = PhoneNumber,
                 DateOfBirth = DateOfBirth,
-                UserType = SelectedUserType
+                UserType = IsLandlord ? UserType.Landlord : UserType.Student // Use selected type
             };
 
             var result = await _authService.RegisterAsync(registerDto);
