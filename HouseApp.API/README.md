@@ -39,6 +39,32 @@ HouseApp.API/
 - .NET 10 SDK
 - Stripe account (for payment testing)
 
+### Quick Start (Database Setup)
+
+1. **Navigate to the API folder:**
+   ```bash
+   cd HouseApp.API
+   ```
+
+2. **Install Entity Framework tools (if not already installed):**
+   ```bash
+   dotnet tool install --global dotnet-ef
+   ```
+
+3. **Run database migrations:**
+   ```bash
+   dotnet ef database update
+   ```
+   
+   This will create the `houseapp.db` SQLite database file in the HouseApp.API folder.
+
+4. **Start the API:**
+   ```bash
+   dotnet run
+   ```
+   
+   The API will start on `https://localhost:7001` or `http://localhost:5000`
+
 ### Configuration
 
 1. Update `appsettings.json` with your credentials:
@@ -57,15 +83,44 @@ HouseApp.API/
 }
 ```
 
-2. Run migrations (if not already applied):
+### Verify Database Created
+
+After running migrations, check for the `houseapp.db` file in the HouseApp.API folder:
 ```bash
+ls -la houseapp.db
+```
+
+### Troubleshooting
+
+**If migration fails:**
+```bash
+# Ensure you're in the HouseApp.API directory
+cd HouseApp.API
+
+# Check if EF tools are installed
+dotnet ef --version
+
+# If not installed or old version, update
+dotnet tool update --global dotnet-ef
+
+# Try migration again
 dotnet ef database update
 ```
 
-3. Run the application:
+**If database already exists but has schema issues:**
 ```bash
-dotnet run
+# Drop and recreate (WARNING: This deletes all data)
+rm houseapp.db
+dotnet ef database update
 ```
+
+### First Time Setup
+
+After the database is created, you can:
+1. Run the MAUI app (HouseApp project)
+2. Register a new account (Student or Landlord)
+3. Login with your registered credentials
+4. Start using the application!
 
 ## API Endpoints
 
