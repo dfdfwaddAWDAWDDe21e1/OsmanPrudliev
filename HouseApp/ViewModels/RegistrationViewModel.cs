@@ -71,10 +71,14 @@ public partial class RegistrationViewModel : ObservableObject
                 // Store user type in SecureStorage
                 await SecureStorage.SetAsync(Constants.UserTypeKey, result.Data.UserType.ToString());
 
+                // Switch to the appropriate shell for the user type
+                var app = Application.Current as App;
+                app?.SetShellForUserType(result.Data.UserType);
+
                 // Navigate based on user type
                 if (result.Data.UserType == UserType.Landlord)
                 {
-                    await Shell.Current.GoToAsync("///landlorddashboard");
+                    await Shell.Current.GoToAsync("///tabs/dashboard");
                 }
                 else // Student
                 {
@@ -131,10 +135,14 @@ public partial class RegistrationViewModel : ObservableObject
                 // Store user type in SecureStorage
                 await SecureStorage.SetAsync(Constants.UserTypeKey, result.Data.UserType.ToString());
 
+                // Switch to the appropriate shell for the user type
+                var app = Application.Current as App;
+                app?.SetShellForUserType(result.Data.UserType);
+
                 // Navigate based on user type
                 if (result.Data.UserType == UserType.Landlord)
                 {
-                    await Shell.Current.GoToAsync("///landlorddashboard");
+                    await Shell.Current.GoToAsync("///tabs/dashboard");
                 }
                 else // Student
                 {
