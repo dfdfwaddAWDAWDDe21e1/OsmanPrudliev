@@ -1,15 +1,47 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="HouseApp.Views.ChatPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:HouseApp.ViewModels"
+    xmlns:converters="clr-namespace:HouseApp.Converters"
+    x:DataType="viewModels:ChatViewModel"
     Title="Chat"
     BackgroundColor="{StaticResource AppBg}">
 
-    <Grid RowDefinitions="Auto,*,Auto" Padding="20" RowSpacing="14">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
+            <converters:BoolToObjectConverter x:Key="BoolToObjectConverter" />
+            <converters:BoolToMessageBackgroundConverter x:Key="BoolToMessageBackgroundConverter" />
+            <converters:BoolToMessageBorderConverter x:Key="BoolToMessageBorderConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="20" RowSpacing="14">
+
+        <!-- Connection Status Indicator -->
+        <Frame Grid.Row="0" 
+               BackgroundColor="{StaticResource AccentLight}" 
+               Padding="8" 
+               CornerRadius="12"
+               HasShadow="False"
+               BorderColor="{StaticResource AccentBorder}">
+            <HorizontalStackLayout Spacing="8">
+                <BoxView WidthRequest="8" 
+                         HeightRequest="8" 
+                         CornerRadius="4"
+                         VerticalOptions="Center"
+                         BackgroundColor="{Binding IsConnected, Converter={StaticResource BoolToColorConverter}}" />
+                <Label Text="{Binding ConnectionStatus}" 
+                       FontSize="12"
+                       TextColor="{StaticResource TextPrimary}"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Frame>
 
         <!-- Header -->
-        <Frame Grid.Row="0"
+        <Frame Grid.Row="1"
                CornerRadius="18"
                HasShadow="True"
                Padding="14"
@@ -43,8 +75,8 @@
             </Grid>
         </Frame>
 
-        <!-- Messages (static placeholders) -->
-        <ScrollView Grid.Row="1">
+        <!-- Messages -->
+        <ScrollView Grid.Row="2">
             <VerticalStackLayout Spacing="12">
 				
 				<!-- Today separator chip -->
@@ -60,113 +92,56 @@
 							   TextColor="{StaticResource Accent}" />
 					</Frame>
 				</HorizontalStackLayout>
-				<!-- Optional extra status chip -->
-				<HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
-					<Frame CornerRadius="14"
-						   Padding="12,6"
-						   HasShadow="False"
-						   BackgroundColor="{StaticResource AccentLight}"
-						   BorderColor="{StaticResource AccentBorder}">
-						<Label Text="Today"
-							   FontSize="12"
-							   FontAttributes="Bold"
-							   TextColor="{StaticResource Accent}" />
-					</Frame>
 
-					<Frame CornerRadius="14"
-						   Padding="12,6"
-						   HasShadow="False"
-						   BackgroundColor="#FEF3C7"
-						   BorderColor="#FDE68A">
-						<Label Text="2 new"
-							   FontSize="12"
-							   FontAttributes="Bold"
-							   TextColor="#92400E" />
-					</Frame>
-				</HorizontalStackLayout>
-
-				<!-- Other person message (left) -->
-                <VerticalStackLayout Spacing="4" HorizontalOptions="Start" WidthRequest="320">
-                    <Label Text="Ivo"
-                           FontSize="12"
-                           TextColor="{StaticResource TextMuted}" />
-                    <Frame CornerRadius="16"
-                           Padding="12"
-                           BackgroundColor="{StaticResource CardBg}"
-                           BorderColor="{StaticResource Border}"
-                           HasShadow="False">
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="Hey, rent is due soon—do we split it this weekend?"
-                                   FontSize="14"
-                                   TextColor="{StaticResource TextPrimary}" />
-                            <Label Text="09:12"
-                                   FontSize="10"
-                                   TextColor="{StaticResource TextMuted}"
-                                   HorizontalOptions="End" />
-                        </VerticalStackLayout>
-                    </Frame>
-                </VerticalStackLayout>
-
-                <!-- Your message (right) -->
-                <VerticalStackLayout Spacing="4" HorizontalOptions="End" WidthRequest="320">
-                    <Label Text="You"
-                           FontSize="12"
-                           TextColor="{StaticResource TextMuted}"
-                           HorizontalOptions="End" />
-                    <Frame CornerRadius="16"
-                           Padding="12"
-                           BackgroundColor="{StaticResource AccentLight}"
-                           BorderColor="{StaticResource AccentBorder}"
-                           HasShadow="False">
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="Yes, works for me. I’ll transfer my part on Saturday."
-                                   FontSize="14"
-                                   TextColor="{StaticResource TextPrimary}" />
-                            <Label Text="09:13"
-                                   FontSize="10"
-                                   TextColor="{StaticResource TextMuted}"
-                                   HorizontalOptions="End" />
-                        </VerticalStackLayout>
-                    </Frame>
-                </VerticalStackLayout>
-
-                <!-- Another left message -->
-                <VerticalStackLayout Spacing="4" HorizontalOptions="Start" WidthRequest="320">
-                    <Label Text="Maria"
-                           FontSize="12"
-                           TextColor="{StaticResource TextMuted}" />
-                    <Frame CornerRadius="16"
-                           Padding="12"
-                           BackgroundColor="{StaticResource CardBg}"
-                           BorderColor="{StaticResource Border}"
-                           HasShadow="False">
-                        <VerticalStackLayout Spacing="6">
-                            <Label Text="Also, can we add a kitchen cleaning chore to the calendar?"
-                                   FontSize="14"
-                                   TextColor="{StaticResource TextPrimary}" />
-                            <Label Text="09:16"
-                                   FontSize="10"
-                                   TextColor="{StaticResource TextMuted}"
-                                   HorizontalOptions="End" />
-                        </VerticalStackLayout>
-                    </Frame>
-                </VerticalStackLayout>
+                <!-- Dynamic messages from ViewModel -->
+                <CollectionView ItemsSource="{Binding Messages}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout Spacing="4" 
+                                                 Padding="0,4"
+                                                 HorizontalOptions="{Binding IsCurrentUser, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='End|Start'}" 
+                                                 WidthRequest="320">
+                                <Label Text="{Binding SenderName}"
+                                       FontSize="12"
+                                       TextColor="{StaticResource TextMuted}"
+                                       HorizontalOptions="{Binding IsCurrentUser, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='End|Start'}" />
+                                <Frame CornerRadius="16"
+                                       Padding="12"
+                                       BackgroundColor="{Binding IsCurrentUser, Converter={StaticResource BoolToMessageBackgroundConverter}}"
+                                       BorderColor="{Binding IsCurrentUser, Converter={StaticResource BoolToMessageBorderConverter}}"
+                                       HasShadow="False">
+                                    <VerticalStackLayout Spacing="6">
+                                        <Label Text="{Binding MessageText}"
+                                               FontSize="14"
+                                               TextColor="{StaticResource TextPrimary}" />
+                                        <Label Text="{Binding Timestamp, StringFormat='{0:HH:mm}'}"
+                                               FontSize="10"
+                                               TextColor="{StaticResource TextMuted}"
+                                               HorizontalOptions="End" />
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
                 <!-- Spacer so last bubble doesn't hide behind input -->
                 <BoxView HeightRequest="10" Opacity="0" />
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Input Bar (UI only) -->
-        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+        <!-- Input Bar -->
+        <Grid Grid.Row="3" ColumnDefinitions="*,Auto" ColumnSpacing="10">
             <Frame CornerRadius="18"
                    Padding="10"
                    BackgroundColor="{StaticResource CardBg}"
                    BorderColor="{StaticResource Border}"
                    HasShadow="False">
                 <Entry Placeholder="Type a message…"
+                       Text="{Binding MessageText}"
                        TextColor="{StaticResource TextPrimary}"
-                       PlaceholderColor="{StaticResource TextMuted}" />
+                       PlaceholderColor="{StaticResource TextMuted}"
+                       ReturnCommand="{Binding SendMessageCommand}" />
             </Frame>
 
             <Frame Grid.Column="1"
@@ -174,7 +149,11 @@
                    HeightRequest="54"
                    CornerRadius="18"
                    BackgroundColor="{StaticResource Accent}"
-                   HasShadow="False">
+                   HasShadow="False"
+                   IsEnabled="{Binding IsConnected}">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SendMessageCommand}" />
+                </Frame.GestureRecognizers>
                 <Label Text="➤"
                        FontSize="18"
                        TextColor="White"

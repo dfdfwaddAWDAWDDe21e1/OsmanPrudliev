@@ -47,6 +47,8 @@ public static class MauiProgram
         builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<AppShell>();
+        builder.Services.AddSingleton<LandlordShell>();
+        builder.Services.AddSingleton<StudentShell>();
         builder.Services.AddTransient<RegistrationPage>();
         builder.Services.AddTransient<HomePage>();
         builder.Services.AddTransient<CalendarPage>();

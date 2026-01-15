@@ -8,8 +8,10 @@ public class ChatService
 {
     private HubConnection? _hubConnection;
     private readonly AuthService _authService;
+    private bool _isConnecting;
 
     public event Action<ChatMessage>? MessageReceived;
+    public event Action<string>? ConnectionStatusChanged;
     public bool IsConnected => _hubConnection?.State == HubConnectionState.Connected;
 
     public ChatService(AuthService authService)
@@ -19,11 +21,19 @@ public class ChatService
 
     public async Task InitializeAsync(int houseId)
     {
+        if (_isConnecting || IsConnected)
+            return;
+
+        _isConnecting = true;
+
         try
         {
             var token = await SecureStorage.GetAsync(Constants.TokenKey);
             if (string.IsNullOrEmpty(token))
+            {
+                ConnectionStatusChanged?.Invoke("Error: No authentication token");
                 return;
+            }
 
             _hubConnection = new HubConnectionBuilder()
                 .WithUrl($"{Constants.ApiBaseUrl}/chathub?houseId={houseId}", options =>
@@ -50,11 +60,35 @@ public class ChatService
                 MessageReceived?.Invoke(message);
             });
 
+            _hubConnection.Reconnecting += (error) =>
+            {
+                ConnectionStatusChanged?.Invoke("Reconnecting...");
+                return Task.CompletedTask;
+            };
+
+            _hubConnection.Reconnected += (connectionId) =>
+            {
+                ConnectionStatusChanged?.Invoke("Connected");
+                return Task.CompletedTask;
+            };
+
+            _hubConnection.Closed += (error) =>
+            {
+                ConnectionStatusChanged?.Invoke("Disconnected");
+                return Task.CompletedTask;
+            };
+
             await _hubConnection.StartAsync();
+            ConnectionStatusChanged?.Invoke("Connected");
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"SignalR connection error: {ex.Message}");
+            ConnectionStatusChanged?.Invoke($"Error: {ex.Message}");
+        }
+        finally
+        {
+            _isConnecting = false;
         }
     }
 
