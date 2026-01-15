@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HouseApp.Models;
 using HouseApp.Services;
-using HouseApp.API.DTOs;
+using HouseApp.DTOs;
 using System.Collections.ObjectModel;
 
 namespace HouseApp.ViewModels;
