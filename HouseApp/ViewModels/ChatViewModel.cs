@@ -137,11 +137,12 @@ public partial class ChatViewModel : ObservableObject
             return;
         }
 
+        string message = string.Empty;
         try
         {
             IsBusy = true;
             
-            var message = MessageText;
+            message = MessageText;
             MessageText = string.Empty; // Clear immediately
             
             await _chatService.SendMessageAsync(CurrentHouseId, message);
