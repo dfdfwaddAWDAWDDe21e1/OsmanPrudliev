@@ -25,10 +25,10 @@ public partial class HouseSearchViewModel : ObservableObject
     public HouseSearchViewModel(ApiService apiService)
     {
         _apiService = apiService;
-        LoadAvailableHouses();
+        _ = LoadAvailableHousesAsync();
     }
 
-    private async void LoadAvailableHouses()
+    private async Task LoadAvailableHousesAsync()
     {
         try
         {
