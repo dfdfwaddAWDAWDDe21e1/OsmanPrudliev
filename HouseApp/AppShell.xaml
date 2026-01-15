@@ -28,7 +28,7 @@
 
     <ShellContent
         Route="login"
-        ContentTemplate="{DataTemplate views:LoginPage}" />
+        ContentTemplate="{DataTemplate views:RegistrationPage}" />
 
     <TabBar Route="tabs">
         <ShellContent

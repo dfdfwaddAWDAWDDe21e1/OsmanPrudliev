@@ -2,7 +2,8 @@
 <Application
     x:Class="HouseApp.App"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:HouseApp.Converters">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -17,6 +18,10 @@
             <Color x:Key="Accent">#6D28D9</Color>
             <Color x:Key="AccentLight">#F3E8FF</Color>
             <Color x:Key="AccentBorder">#D8B4FE</Color>
+
+            <!-- Converters -->
+            <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <converters:BoolToObjectConverter x:Key="BoolToObjectConverter" />
 
         </ResourceDictionary>
     </Application.Resources>

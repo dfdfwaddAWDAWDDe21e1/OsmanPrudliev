@@ -3,6 +3,8 @@
     x:Class="HouseApp.Views.ProfilePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:HouseApp.ViewModels"
+    x:DataType="viewModels:ProfileViewModel"
     Title="Profile"
     BackgroundColor="{StaticResource AppBg}">
 
@@ -15,7 +17,7 @@
                        FontSize="26"
                        FontAttributes="Bold"
                        TextColor="{StaticResource TextPrimary}" />
-                <Label Text="Manage your info and household members"
+                <Label Text="Manage your account"
                        FontSize="14"
                        TextColor="{StaticResource TextMuted}" />
             </VerticalStackLayout>
@@ -56,39 +58,21 @@
                                BorderColor="{StaticResource Border}"
                                HasShadow="False">
                             <Entry Placeholder="Your name"
+                                   Text="{Binding FirstName}"
                                    TextColor="{StaticResource TextPrimary}"
                                    PlaceholderColor="{StaticResource TextMuted}" />
                         </Frame>
                     </VerticalStackLayout>
-					<HorizontalStackLayout Spacing="10">
-						<Frame CornerRadius="14"
-							   Padding="12,6"
-							   HasShadow="False"
-							   BackgroundColor="{StaticResource AccentLight}"
-							   BorderColor="{StaticResource AccentBorder}">
-							<Label Text="Owner"
-								   FontSize="12"
-								   FontAttributes="Bold"
-								   TextColor="{StaticResource Accent}" />
-						</Frame>
 
-						<Frame CornerRadius="14"
-							   Padding="12,6"
-							   HasShadow="False"
-							   BackgroundColor="{StaticResource CardBg}"
-							   BorderColor="{StaticResource Border}">
-							<Label Text="House: A12 (placeholder)"
-								   FontSize="12"
-								   TextColor="{StaticResource TextMuted}" />
-						</Frame>
-					</HorizontalStackLayout>
-
-					<!-- Change photo button (UI only) -->
+                    <!-- Change photo button -->
                     <Frame Grid.Row="1" Grid.Column="1"
                            CornerRadius="14"
                            Padding="12,10"
                            BackgroundColor="{StaticResource Accent}"
                            HasShadow="False">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PickProfilePictureCommand}" />
+                        </Frame.GestureRecognizers>
                         <Label Text="Change profile picture"
                                FontSize="14"
                                FontAttributes="Bold"
@@ -96,108 +80,23 @@
                                HorizontalOptions="Center" />
                     </Frame>
 
-                    <!-- Small hint -->
-                    <Label Grid.Row="2" Grid.Column="1"
-                           Text="(Front-end only for now)"
-                           FontSize="12"
-                           TextColor="{StaticResource TextMuted}" />
+                    <!-- Email -->
+                    <VerticalStackLayout Grid.Row="2" Grid.Column="1" Spacing="4">
+                        <Label Text="Email" FontSize="12" TextColor="{StaticResource TextMuted}" />
+                        <Label Text="{Binding Email}" FontSize="14" TextColor="{StaticResource TextPrimary}" />
+                    </VerticalStackLayout>
                 </Grid>
             </Frame>
 
-            <!-- Members -->
-            <Label Text="Household members"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   TextColor="{StaticResource TextPrimary}" />
+            <!-- Logout Button -->
+            <Button
+                Text="Logout"
+                Command="{Binding LogoutCommand}"
+                BackgroundColor="#EF4444"
+                TextColor="White"
+                CornerRadius="16" />
 
-            <Frame CornerRadius="18"
-                   HasShadow="False"
-                   Padding="14"
-                   BackgroundColor="{StaticResource CardBg}"
-                   BorderColor="{StaticResource Border}">
-
-                <VerticalStackLayout Spacing="12">
-
-                    <!-- Member item template (static placeholders) -->
-					<Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-						<Frame WidthRequest="42" HeightRequest="42" CornerRadius="21"
-                               BackgroundColor="#F3F4F6"
-                               BorderColor="{StaticResource Border}"
-                               HasShadow="False">
-                            <Label Text="I"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"
-                                   TextColor="{StaticResource TextPrimary}" />
-                        </Frame>
-                        <VerticalStackLayout Grid.Column="1" Spacing="2">
-                            <Label Text="Ivo"
-                                   FontSize="14"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource TextPrimary}" />
-                            <Label Text="Member"
-                                   FontSize="12"
-                                   TextColor="{StaticResource TextMuted}" />
-                        </VerticalStackLayout>
-						<Frame Grid.Column="2"
-       CornerRadius="14"
-       Padding="10,5"
-       HasShadow="False"
-       BackgroundColor="#F3F4F6"
-       BorderColor="{StaticResource Border}">
-							<Label Text="Member"
-								   FontSize="11"
-								   FontAttributes="Bold"
-								   TextColor="{StaticResource TextMuted}" />
-						</Frame>
-					</Grid>
-
-                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-                        <Frame WidthRequest="42" HeightRequest="42" CornerRadius="21"
-                               BackgroundColor="#F3F4F6"
-                               BorderColor="{StaticResource Border}"
-                               HasShadow="False">
-                            <Label Text="M"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"
-                                   TextColor="{StaticResource TextPrimary}" />
-                        </Frame>
-                        <VerticalStackLayout Grid.Column="1" Spacing="2">
-                            <Label Text="Maria"
-                                   FontSize="14"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource TextPrimary}" />
-                            <Label Text="Member"
-                                   FontSize="12"
-                                   TextColor="{StaticResource TextMuted}" />
-                        </VerticalStackLayout>
-                    </Grid>
-
-                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-                        <Frame WidthRequest="42" HeightRequest="42" CornerRadius="21"
-                               BackgroundColor="{StaticResource AccentLight}"
-                               BorderColor="{StaticResource AccentBorder}"
-                               HasShadow="False">
-                            <Label Text="Y"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"
-                                   TextColor="{StaticResource Accent}" />
-                        </Frame>
-                        <VerticalStackLayout Grid.Column="1" Spacing="2">
-                            <Label Text="You"
-                                   FontSize="14"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource TextPrimary}" />
-                            <Label Text="Owner (placeholder)"
-                                   FontSize="12"
-                                   TextColor="{StaticResource TextMuted}" />
-                        </VerticalStackLayout>
-                    </Grid>
-
-                </VerticalStackLayout>
-            </Frame>
+            <ActivityIndicator IsRunning="{Binding IsLoading}" Color="{StaticResource Accent}" />
 
         </VerticalStackLayout>
     </ScrollView>
