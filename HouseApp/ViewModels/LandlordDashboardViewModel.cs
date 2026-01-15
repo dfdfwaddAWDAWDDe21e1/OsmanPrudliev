@@ -2,15 +2,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HouseApp.Models;
 using HouseApp.Services;
+using HouseApp.API.DTOs;
 using System.Collections.ObjectModel;
 
 namespace HouseApp.ViewModels;
 
 public partial class LandlordDashboardViewModel : ObservableObject
 {
-    private readonly HouseService _houseService;
-    private readonly AuthService _authService;
-    private readonly PaymentService _paymentService;
+    private readonly ApiService _apiService;
 
     [ObservableProperty]
     private ObservableCollection<House> houses = new();
@@ -27,11 +26,15 @@ public partial class LandlordDashboardViewModel : ObservableObject
     [ObservableProperty]
     private bool isLoading;
 
-    public LandlordDashboardViewModel(HouseService houseService, AuthService authService, PaymentService paymentService)
+    [ObservableProperty]
+    private bool isRefreshing;
+
+    [ObservableProperty]
+    private bool isEmpty;
+
+    public LandlordDashboardViewModel(ApiService apiService)
     {
-        _houseService = houseService;
-        _authService = authService;
-        _paymentService = paymentService;
+        _apiService = apiService;
     }
 
     public async Task InitializeAsync()
@@ -42,28 +45,72 @@ public partial class LandlordDashboardViewModel : ObservableObject
     [RelayCommand]
     private async Task LoadHousesAsync()
     {
-        IsLoading = true;
-
         try
         {
-            var landlordId = await _authService.GetCurrentUserIdAsync();
-            var housesList = await _houseService.GetLandlordHousesAsync(landlordId);
+            IsLoading = true;
+            IsRefreshing = true;
 
-            Houses.Clear();
-            foreach (var house in housesList)
+            var userId = await SecureStorage.GetAsync(Constants.UserIdKey);
+            if (string.IsNullOrEmpty(userId))
             {
-                Houses.Add(house);
+                await Application.Current!.MainPage!.DisplayAlert("Error", "User not logged in", "OK");
+                return;
             }
 
-            CalculateStats();
+            System.Diagnostics.Debug.WriteLine($"Loading houses for landlord ID: {userId}");
+
+            // Get landlord's houses from the API
+            var houseDtoList = await _apiService.GetAsync<List<HouseDto>>("/api/houses/my-houses");
+
+            if (houseDtoList != null && houseDtoList.Any())
+            {
+                System.Diagnostics.Debug.WriteLine($"Loaded {houseDtoList.Count} houses");
+                
+                Houses.Clear();
+                foreach (var houseDto in houseDtoList)
+                {
+                    var house = new House
+                    {
+                        Id = houseDto.Id ?? 0,
+                        Name = houseDto.Name,
+                        Address = houseDto.Address,
+                        LandlordId = houseDto.LandlordId ?? 0,
+                        MonthlyRent = houseDto.MonthlyRent,
+                        UtilitiesCost = houseDto.UtilitiesCost,
+                        WaterBillCost = houseDto.WaterBillCost,
+                        MaxOccupants = houseDto.MaxOccupants,
+                        CurrentOccupants = houseDto.CurrentOccupants ?? 0,
+                        CreatedDate = houseDto.CreatedDate ?? DateTime.UtcNow
+                    };
+                    
+                    System.Diagnostics.Debug.WriteLine($"House: {house.Name} - {house.Address} - Occupants: {house.CurrentOccupants}");
+                    Houses.Add(house);
+                }
+
+                IsEmpty = false;
+                CalculateStats();
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("No houses found");
+                Houses.Clear();
+                IsEmpty = true;
+                TotalProperties = 0;
+                TotalTenants = 0;
+                TotalMonthlyIncome = 0;
+            }
         }
         catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"Error loading houses: {ex.Message}");
             await Application.Current!.MainPage!.DisplayAlert("Error", $"Failed to load houses: {ex.Message}", "OK");
+            Houses.Clear();
+            IsEmpty = true;
         }
         finally
         {
             IsLoading = false;
+            IsRefreshing = false;
         }
     }
 
@@ -84,5 +131,11 @@ public partial class LandlordDashboardViewModel : ObservableObject
     private async Task AddHouseAsync()
     {
         await Shell.Current.GoToAsync("housemanagement");
+    }
+
+    [RelayCommand]
+    private async Task Refresh()
+    {
+        await LoadHousesAsync();
     }
 }
