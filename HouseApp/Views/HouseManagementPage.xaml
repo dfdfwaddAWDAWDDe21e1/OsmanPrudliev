@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HouseApp.Views.HouseManagementPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:HouseApp.ViewModels"
+    x:DataType="viewModels:HouseManagementViewModel"
+    Title="{Binding IsEditMode, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='Edit House|Add House'}"
+    BackgroundColor="{StaticResource AppBg}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Label
+                Text="House Details"
+                FontSize="22"
+                FontAttributes="Bold"
+                TextColor="{StaticResource TextPrimary}" />
+
+            <Frame CornerRadius="16" Padding="16" BackgroundColor="{StaticResource CardBg}" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Entry Placeholder="House Name" Text="{Binding HouseName}" />
+                    <Entry Placeholder="Address" Text="{Binding Address}" />
+                    <Entry Placeholder="Monthly Rent" Text="{Binding MonthlyRent}" Keyboard="Numeric" />
+                    <Entry Placeholder="Utilities Cost" Text="{Binding UtilitiesCost}" Keyboard="Numeric" />
+                    <Entry Placeholder="Water Bill Cost" Text="{Binding WaterBillCost}" Keyboard="Numeric" />
+                    <Entry Placeholder="Max Occupants" Text="{Binding MaxOccupants}" Keyboard="Numeric" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button
+                Text="Save House"
+                Command="{Binding SaveHouseCommand}"
+                BackgroundColor="{StaticResource Accent}"
+                TextColor="White"
+                CornerRadius="16" />
+
+            <Button
+                Text="Delete House"
+                Command="{Binding DeleteHouseCommand}"
+                IsVisible="{Binding IsEditMode}"
+                BackgroundColor="#EF4444"
+                TextColor="White"
+                CornerRadius="16" />
+
+            <!-- Tenants Section -->
+            <VerticalStackLayout Spacing="10" IsVisible="{Binding IsEditMode}">
+                <Label
+                    Text="Tenants"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource TextPrimary}" />
+
+                <CollectionView ItemsSource="{Binding Tenants}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="14" Padding="12" BackgroundColor="{StaticResource CardBg}" BorderColor="{StaticResource Border}" HasShadow="False" Margin="0,4">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                    <Frame WidthRequest="40" HeightRequest="40" CornerRadius="20" BackgroundColor="{StaticResource AccentLight}" BorderColor="{StaticResource AccentBorder}" HasShadow="False">
+                                        <Label Text="👤" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    </Frame>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                        <Label Text="{Binding StudentName}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                                        <Label Text="{Binding JoinedDate, StringFormat='Joined: {0:MMM dd, yyyy}'}" FontSize="12" TextColor="{StaticResource TextMuted}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <!-- Payments Section -->
+            <VerticalStackLayout Spacing="10" IsVisible="{Binding IsEditMode}">
+                <Label
+                    Text="Recent Payments"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource TextPrimary}" />
+
+                <CollectionView ItemsSource="{Binding Payments}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="14" Padding="12" BackgroundColor="{StaticResource CardBg}" BorderColor="{StaticResource Border}" HasShadow="False" Margin="0,4">
+                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="4">
+                                    <Label Text="{Binding PaymentType}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource TextPrimary}" />
+                                    <Label Grid.Row="1" Text="{Binding DueDate, StringFormat='Due: {0:MMM dd, yyyy}'}" FontSize="12" TextColor="{StaticResource TextMuted}" />
+                                    <Label Grid.Column="1" Grid.RowSpan="2" Text="{Binding Amount, StringFormat='€{0:N2}'}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Accent}" VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}" Color="{StaticResource Accent}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

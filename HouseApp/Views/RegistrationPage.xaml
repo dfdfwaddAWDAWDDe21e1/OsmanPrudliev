@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="HouseApp.Views.RegistrationPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:HouseApp.ViewModels"
+    xmlns:models="clr-namespace:HouseApp.Models"
+    x:DataType="viewModels:RegistrationViewModel"
+    Title="Welcome"
+    BackgroundColor="{StaticResource AppBg}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+
+            <Label
+                Text="HouseApp"
+                FontSize="32"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="{StaticResource Accent}" />
+
+            <Label
+                Text="{Binding IsLoginMode, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='Welcome back!|Create your account'}"
+                FontSize="18"
+                HorizontalOptions="Center"
+                TextColor="{StaticResource TextPrimary}" />
+
+            <!-- Login Form -->
+            <VerticalStackLayout Spacing="15" IsVisible="{Binding IsLoginMode}">
+                <Entry
+                    Placeholder="Email"
+                    Text="{Binding Email}"
+                    Keyboard="Email" />
+
+                <Entry
+                    Placeholder="Password"
+                    Text="{Binding Password}"
+                    IsPassword="True" />
+
+                <Button
+                    Text="Login"
+                    Command="{Binding LoginCommand}"
+                    IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                    BackgroundColor="{StaticResource Accent}"
+                    TextColor="White" />
+            </VerticalStackLayout>
+
+            <!-- Registration Form -->
+            <VerticalStackLayout Spacing="15" IsVisible="{Binding IsLoginMode, Converter={StaticResource InvertedBoolConverter}}">
+                <Entry
+                    Placeholder="First Name"
+                    Text="{Binding FirstName}" />
+
+                <Entry
+                    Placeholder="Last Name"
+                    Text="{Binding LastName}" />
+
+                <Entry
+                    Placeholder="Email"
+                    Text="{Binding Email}"
+                    Keyboard="Email" />
+
+                <Entry
+                    Placeholder="Phone Number"
+                    Text="{Binding PhoneNumber}"
+                    Keyboard="Phone" />
+
+                <DatePicker
+                    Date="{Binding DateOfBirth}"
+                    Format="D" />
+
+                <Picker
+                    Title="Select User Type"
+                    ItemsSource="{Binding Source={x:Static models:UserType.Student}}"
+                    SelectedItem="{Binding SelectedUserType}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type models:UserType}">
+                            <models:UserType>Student</models:UserType>
+                            <models:UserType>Landlord</models:UserType>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Entry
+                    Placeholder="Password"
+                    Text="{Binding Password}"
+                    IsPassword="True" />
+
+                <Button
+                    Text="Register"
+                    Command="{Binding RegisterCommand}"
+                    IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+                    BackgroundColor="{StaticResource Accent}"
+                    TextColor="White" />
+            </VerticalStackLayout>
+
+            <!-- Toggle Button -->
+            <Button
+                Text="{Binding IsLoginMode, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='Need an account? Register|Already have an account? Login'}"
+                Command="{Binding ToggleModeCommand}"
+                BackgroundColor="Transparent"
+                TextColor="{StaticResource Accent}" />
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}" Color="{StaticResource Accent}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

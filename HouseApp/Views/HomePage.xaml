@@ -52,26 +52,26 @@
                        HasShadow="False"
                        BackgroundColor="#FFFFFF"
                        Opacity="0.22">
-                                <Label Text="UPCOMING"
+                                <Label Text="{Binding NextPayment.Status}"
                            FontSize="11"
                            FontAttributes="Bold"
                            TextColor="White" />
                             </Frame>
                         </Grid>
 
-                        <Label Text="€520.00"
+                        <Label Text="{Binding NextPayment.Amount, StringFormat='€{0:N2}'}"
                    FontSize="34"
                    FontAttributes="Bold"
                    TextColor="White" />
 
-                        <!-- Bottom row: due info chip -->
+                        <!-- Bottom row: due info chip + pay button -->
                         <HorizontalStackLayout Spacing="8">
                             <Frame CornerRadius="14"
                        Padding="10,6"
                        HasShadow="False"
                        BackgroundColor="#FFFFFF"
                        Opacity="0.18">
-                                <Label Text="Due in 9 days"
+                                <Label Text="{Binding NextPayment.DueDate, StringFormat='Due: {0:MMM dd}'}"
                            FontSize="12"
                            TextColor="White" />
                             </Frame>
@@ -80,9 +80,13 @@
                        Padding="10,6"
                        HasShadow="False"
                        BackgroundColor="#FFFFFF"
-                       Opacity="0.18">
-                                <Label Text="Tap for details (later)"
+                       Opacity="0.3">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateToPaymentCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Label Text="Pay Now →"
                            FontSize="12"
+                           FontAttributes="Bold"
                            TextColor="White" />
                             </Frame>
                         </HorizontalStackLayout>

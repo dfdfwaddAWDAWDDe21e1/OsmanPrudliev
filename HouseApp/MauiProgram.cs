@@ -18,26 +18,43 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        // --------------------
-        // Services
-        // --------------------
-        builder.Services.AddSingleton<UserSession>();
+        // HttpClient
+        builder.Services.AddSingleton(sp => new HttpClient
+        {
+            BaseAddress = new Uri(Constants.ApiBaseUrl)
+        });
 
-        // --------------------
+        // Services
+        builder.Services.AddSingleton<UserSession>();
+        builder.Services.AddSingleton<ApiService>();
+        builder.Services.AddSingleton<AuthService>();
+        builder.Services.AddSingleton<ChatService>();
+        builder.Services.AddSingleton<PaymentService>();
+        builder.Services.AddSingleton<HouseService>();
+
         // ViewModels
-        // --------------------
         builder.Services.AddSingleton<LoginViewModel>();
         builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddTransient<RegistrationViewModel>();
+        builder.Services.AddTransient<HomeViewModel>();
+        builder.Services.AddTransient<ChatViewModel>();
+        builder.Services.AddTransient<ProfileViewModel>();
+        builder.Services.AddTransient<LandlordDashboardViewModel>();
+        builder.Services.AddTransient<HouseManagementViewModel>();
+        builder.Services.AddTransient<PaymentViewModel>();
 
-        // --------------------
         // Views (Pages)
-        // --------------------
         builder.Services.AddSingleton<LoginPage>();
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<AppShell>();
-        builder.Services.AddSingleton<HomeViewModel>();
-        builder.Services.AddSingleton<HomePage>();
-        builder.Services.AddSingleton<CalendarPage>();
+        builder.Services.AddTransient<RegistrationPage>();
+        builder.Services.AddTransient<HomePage>();
+        builder.Services.AddTransient<CalendarPage>();
+        builder.Services.AddTransient<ChatPage>();
+        builder.Services.AddTransient<ProfilePage>();
+        builder.Services.AddTransient<LandlordDashboardPage>();
+        builder.Services.AddTransient<HouseManagementPage>();
+        builder.Services.AddTransient<PaymentPage>();
 
         return builder.Build();
     }
