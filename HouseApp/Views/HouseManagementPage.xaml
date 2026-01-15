@@ -21,10 +21,10 @@
                 <VerticalStackLayout Spacing="12">
                     <Entry Placeholder="House Name" Text="{Binding HouseName}" />
                     <Entry Placeholder="Address" Text="{Binding Address}" />
-                    <Entry Placeholder="Monthly Rent" Text="{Binding MonthlyRent}" Keyboard="Numeric" />
-                    <Entry Placeholder="Utilities Cost" Text="{Binding UtilitiesCost}" Keyboard="Numeric" />
-                    <Entry Placeholder="Water Bill Cost" Text="{Binding WaterBillCost}" Keyboard="Numeric" />
-                    <Entry Placeholder="Max Occupants" Text="{Binding MaxOccupants}" Keyboard="Numeric" />
+                    <Entry Placeholder="Monthly Rent" Text="{Binding MonthlyRent}" Keyboard="{x:Static Keyboard.Numeric}" />
+                    <Entry Placeholder="Utilities Cost" Text="{Binding UtilitiesCost}" Keyboard="{x:Static Keyboard.Numeric}" />
+                    <Entry Placeholder="Water Bill Cost" Text="{Binding WaterBillCost}" Keyboard="{x:Static Keyboard.Numeric}" />
+                    <Entry Placeholder="Max Occupants" Text="{Binding MaxOccupants}" Keyboard="{x:Static Keyboard.Numeric}" />
                 </VerticalStackLayout>
             </Frame>
 

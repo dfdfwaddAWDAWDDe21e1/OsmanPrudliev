@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:HouseApp.ViewModels"
     xmlns:models="clr-namespace:HouseApp.Models"
+    xmlns:sys="clr-namespace:System;assembly=netstandard"
     x:DataType="viewModels:RegistrationViewModel"
     Title="Welcome"
     BackgroundColor="{StaticResource AppBg}">
@@ -27,15 +28,41 @@
 
             <!-- Login Form -->
             <VerticalStackLayout Spacing="15" IsVisible="{Binding IsLoginMode}">
-                <Entry
-                    Placeholder="Email"
-                    Text="{Binding Email}"
-                    Keyboard="Email" />
+                <Label Text="Email" 
+                       FontSize="14" 
+                       TextColor="{StaticResource TextMuted}" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="{StaticResource Border}" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="your.email@example.com"
+                           Text="{Binding Email}"
+                           TextColor="{StaticResource TextPrimary}"
+                           PlaceholderColor="{StaticResource TextMuted}"
+                           BackgroundColor="Transparent"
+                           Keyboard="{x:Static Keyboard.Email}" />
+                </Border>
 
-                <Entry
-                    Placeholder="Password"
-                    Text="{Binding Password}"
-                    IsPassword="True" />
+                <Label Text="Password" 
+                       FontSize="14" 
+                       TextColor="{StaticResource TextMuted}" 
+                       Margin="0,16,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="{StaticResource Border}" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="Enter your password"
+                           Text="{Binding Password}"
+                           IsPassword="True"
+                           TextColor="{StaticResource TextPrimary}"
+                           PlaceholderColor="{StaticResource TextMuted}"
+                           BackgroundColor="Transparent" />
+                </Border>
 
                 <Button
                     Text="Login"
@@ -47,27 +74,94 @@
 
             <!-- Registration Form -->
             <VerticalStackLayout Spacing="15" IsVisible="{Binding IsLoginMode, Converter={StaticResource InvertedBoolConverter}}">
-                <Entry
-                    Placeholder="First Name"
-                    Text="{Binding FirstName}" />
+                <Label Text="First Name" 
+                       FontSize="14" 
+                       TextColor="{StaticResource TextMuted}" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="{StaticResource Border}" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="John"
+                           Text="{Binding FirstName}"
+                           TextColor="{StaticResource TextPrimary}"
+                           PlaceholderColor="{StaticResource TextMuted}"
+                           BackgroundColor="Transparent" />
+                </Border>
 
-                <Entry
-                    Placeholder="Last Name"
-                    Text="{Binding LastName}" />
+                <Label Text="Last Name" 
+                       FontSize="14" 
+                       TextColor="{StaticResource TextMuted}" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="{StaticResource Border}" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="Doe"
+                           Text="{Binding LastName}"
+                           TextColor="{StaticResource TextPrimary}"
+                           PlaceholderColor="{StaticResource TextMuted}"
+                           BackgroundColor="Transparent" />
+                </Border>
 
-                <Entry
-                    Placeholder="Email"
-                    Text="{Binding Email}"
-                    Keyboard="Email" />
+                <Label Text="Email" 
+                       FontSize="14" 
+                       TextColor="{StaticResource TextMuted}" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="{StaticResource Border}" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="your.email@example.com"
+                           Text="{Binding Email}"
+                           TextColor="{StaticResource TextPrimary}"
+                           PlaceholderColor="{StaticResource TextMuted}"
+                           BackgroundColor="Transparent"
+                           Keyboard="{x:Static Keyboard.Email}" />
+                </Border>
 
-                <Entry
-                    Placeholder="Phone Number"
-                    Text="{Binding PhoneNumber}"
-                    Keyboard="Phone" />
+                <Label Text="Phone Number" 
+                       FontSize="14" 
+                       TextColor="{StaticResource TextMuted}" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="{StaticResource Border}" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="+1234567890"
+                           Text="{Binding PhoneNumber}"
+                           TextColor="{StaticResource TextPrimary}"
+                           PlaceholderColor="{StaticResource TextMuted}"
+                           BackgroundColor="Transparent"
+                           Keyboard="{x:Static Keyboard.Telephone}" />
+                </Border>
 
-                <DatePicker
-                    Date="{Binding DateOfBirth}"
-                    Format="D" />
+                <Label Text="Date of Birth" 
+                       FontSize="14" 
+                       TextColor="{StaticResource TextMuted}" 
+                       Margin="0,16,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="{StaticResource Border}" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <DatePicker Date="{Binding DateOfBirth}"
+                                Format="dd MMMM yyyy"
+                                MinimumDate="1940-01-01"
+                                MaximumDate="{x:Static sys:DateTime.Now}"
+                                TextColor="{StaticResource TextPrimary}"
+                                BackgroundColor="Transparent"
+                                FontSize="16"/>
+                </Border>
 
                 <Picker
                     Title="Select User Type"
@@ -81,10 +175,23 @@
                     </Picker.ItemsSource>
                 </Picker>
 
-                <Entry
-                    Placeholder="Password"
-                    Text="{Binding Password}"
-                    IsPassword="True" />
+                <Label Text="Password" 
+                       FontSize="14" 
+                       TextColor="{StaticResource TextMuted}" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="{StaticResource Border}" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="Enter your password"
+                           Text="{Binding Password}"
+                           IsPassword="True"
+                           TextColor="{StaticResource TextPrimary}"
+                           PlaceholderColor="{StaticResource TextMuted}"
+                           BackgroundColor="Transparent" />
+                </Border>
 
                 <Button
                     Text="Register"
