@@ -30,6 +30,10 @@
         Route="login"
         ContentTemplate="{DataTemplate views:RegistrationPage}" />
 
+    <ShellContent
+        Route="landlorddashboard"
+        ContentTemplate="{DataTemplate views:LandlordDashboardPage}" />
+
     <TabBar Route="tabs">
         <ShellContent
             Title="Home"

@@ -68,7 +68,18 @@ public partial class RegistrationViewModel : ObservableObject
                 _userSession.FirstName = result.Data.FirstName;
                 _userSession.LastName = result.Data.LastName;
 
-                await Shell.Current.GoToAsync("//tabs/home");
+                // Store user type in SecureStorage
+                await SecureStorage.SetAsync(Constants.UserTypeKey, result.Data.UserType.ToString());
+
+                // Navigate based on user type
+                if (result.Data.UserType == UserType.Landlord)
+                {
+                    await Shell.Current.GoToAsync("///landlorddashboard");
+                }
+                else // Student
+                {
+                    await Shell.Current.GoToAsync("///tabs/home");
+                }
             }
             else
             {
@@ -117,7 +128,18 @@ public partial class RegistrationViewModel : ObservableObject
                 _userSession.FirstName = result.Data.FirstName;
                 _userSession.LastName = result.Data.LastName;
 
-                await Shell.Current.GoToAsync("//tabs/home");
+                // Store user type in SecureStorage
+                await SecureStorage.SetAsync(Constants.UserTypeKey, result.Data.UserType.ToString());
+
+                // Navigate based on user type
+                if (result.Data.UserType == UserType.Landlord)
+                {
+                    await Shell.Current.GoToAsync("///landlorddashboard");
+                }
+                else // Student
+                {
+                    await Shell.Current.GoToAsync("///tabs/home");
+                }
             }
             else
             {
