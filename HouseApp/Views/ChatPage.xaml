@@ -12,6 +12,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
+            <converters:BoolToObjectConverter x:Key="BoolToObjectConverter" />
+            <converters:BoolToMessageBackgroundConverter x:Key="BoolToMessageBackgroundConverter" />
+            <converters:BoolToMessageBorderConverter x:Key="BoolToMessageBorderConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -104,8 +107,8 @@
                                        HorizontalOptions="{Binding IsCurrentUser, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='End|Start'}" />
                                 <Frame CornerRadius="16"
                                        Padding="12"
-                                       BackgroundColor="{Binding IsCurrentUser, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='{StaticResource AccentLight}|{StaticResource CardBg}'}"
-                                       BorderColor="{Binding IsCurrentUser, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='{StaticResource AccentBorder}|{StaticResource Border}'}"
+                                       BackgroundColor="{Binding IsCurrentUser, Converter={StaticResource BoolToMessageBackgroundConverter}}"
+                                       BorderColor="{Binding IsCurrentUser, Converter={StaticResource BoolToMessageBorderConverter}}"
                                        HasShadow="False">
                                     <VerticalStackLayout Spacing="6">
                                         <Label Text="{Binding MessageText}"

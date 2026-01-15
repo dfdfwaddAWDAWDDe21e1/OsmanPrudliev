@@ -4,6 +4,17 @@
         <name>HouseApp</name>
     </assembly>
     <members>
+        <member name="T:HouseApp.Converters.BoolToMessageBackgroundConverter">
+            <summary>
+            Converts a boolean to different colors for chat message styling.
+            True = Current user message (accent colors), False = Other user message (neutral colors)
+            </summary>
+        </member>
+        <member name="T:HouseApp.Converters.BoolToMessageBorderConverter">
+            <summary>
+            Converts a boolean to different border colors for chat message styling.
+            </summary>
+        </member>
         <member name="T:HouseApp.ViewModels.ChatViewModel">
             <inheritdoc/>
             <inheritdoc/>

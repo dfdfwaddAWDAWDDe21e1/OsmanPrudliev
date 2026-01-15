@@ -71,24 +71,43 @@ public partial class RegistrationViewModel : ObservableObject
                 // Store user type in SecureStorage
                 await SecureStorage.SetAsync(Constants.UserTypeKey, result.Data.UserType.ToString());
 
-                // Switch to the appropriate shell for the user type
-                var app = Application.Current as App;
-                app?.SetShellForUserType(result.Data.UserType);
+                try
+                {
+                    // Switch to the appropriate shell for the user type
+                    var app = Application.Current as App;
+                    if (app != null)
+                    {
+                        app.SetShellForUserType(result.Data.UserType);
 
-                // Navigate based on user type
-                if (result.Data.UserType == UserType.Landlord)
-                {
-                    await Shell.Current.GoToAsync("///tabs/dashboard");
+                        // Navigate based on user type
+                        if (result.Data.UserType == UserType.Landlord)
+                        {
+                            await Shell.Current.GoToAsync("///tabs/dashboard");
+                        }
+                        else // Student
+                        {
+                            await Shell.Current.GoToAsync("///tabs/home");
+                        }
+                    }
+                    else
+                    {
+                        await Application.Current!.MainPage!.DisplayAlert("Error", "Navigation setup failed", "OK");
+                    }
                 }
-                else // Student
+                catch (Exception navEx)
                 {
-                    await Shell.Current.GoToAsync("///tabs/home");
+                    System.Diagnostics.Debug.WriteLine($"Navigation error: {navEx.Message}");
+                    await Application.Current!.MainPage!.DisplayAlert("Error", $"Navigation failed: {navEx.Message}", "OK");
                 }
             }
             else
             {
                 await Application.Current!.MainPage!.DisplayAlert("Error", result.Message, "OK");
             }
+        }
+        catch (Exception ex)
+        {
+            await Application.Current!.MainPage!.DisplayAlert("Error", $"Login failed: {ex.Message}", "OK");
         }
         finally
         {
@@ -135,24 +154,43 @@ public partial class RegistrationViewModel : ObservableObject
                 // Store user type in SecureStorage
                 await SecureStorage.SetAsync(Constants.UserTypeKey, result.Data.UserType.ToString());
 
-                // Switch to the appropriate shell for the user type
-                var app = Application.Current as App;
-                app?.SetShellForUserType(result.Data.UserType);
+                try
+                {
+                    // Switch to the appropriate shell for the user type
+                    var app = Application.Current as App;
+                    if (app != null)
+                    {
+                        app.SetShellForUserType(result.Data.UserType);
 
-                // Navigate based on user type
-                if (result.Data.UserType == UserType.Landlord)
-                {
-                    await Shell.Current.GoToAsync("///tabs/dashboard");
+                        // Navigate based on user type
+                        if (result.Data.UserType == UserType.Landlord)
+                        {
+                            await Shell.Current.GoToAsync("///tabs/dashboard");
+                        }
+                        else // Student
+                        {
+                            await Shell.Current.GoToAsync("///tabs/home");
+                        }
+                    }
+                    else
+                    {
+                        await Application.Current!.MainPage!.DisplayAlert("Error", "Navigation setup failed", "OK");
+                    }
                 }
-                else // Student
+                catch (Exception navEx)
                 {
-                    await Shell.Current.GoToAsync("///tabs/home");
+                    System.Diagnostics.Debug.WriteLine($"Navigation error: {navEx.Message}");
+                    await Application.Current!.MainPage!.DisplayAlert("Error", $"Navigation failed: {navEx.Message}", "OK");
                 }
             }
             else
             {
                 await Application.Current!.MainPage!.DisplayAlert("Error", result.Message, "OK");
             }
+        }
+        catch (Exception ex)
+        {
+            await Application.Current!.MainPage!.DisplayAlert("Error", $"Registration failed: {ex.Message}", "OK");
         }
         finally
         {
