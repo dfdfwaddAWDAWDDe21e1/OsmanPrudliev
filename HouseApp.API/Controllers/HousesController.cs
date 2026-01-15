@@ -214,4 +214,26 @@ public class HousesController : ControllerBase
 
         return Ok(messages);
     }
+
+    [HttpGet("student/{studentId}/house")]
+    public async Task<ActionResult<HouseTenantDto>> GetStudentHouse(int studentId)
+    {
+        var houseTenant = await _context.HouseTenants
+            .Include(ht => ht.House)
+            .Where(ht => ht.StudentId == studentId && ht.IsActive)
+            .FirstOrDefaultAsync();
+
+        if (houseTenant == null)
+        {
+            return NotFound(new { message = "Student is not assigned to any house" });
+        }
+
+        return Ok(new HouseTenantDto
+        {
+            HouseId = houseTenant.HouseId,
+            HouseName = houseTenant.House.Name,
+            StudentId = houseTenant.StudentId,
+            JoinedDate = houseTenant.JoinedDate
+        });
+    }
 }

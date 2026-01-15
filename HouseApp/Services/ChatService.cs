@@ -94,16 +94,24 @@ public class ChatService
 
     public async Task SendMessageAsync(int houseId, string message)
     {
-        if (_hubConnection?.State == HubConnectionState.Connected)
+        if (_hubConnection?.State != HubConnectionState.Connected)
         {
-            try
-            {
-                await _hubConnection.InvokeAsync("SendMessage", houseId, message);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Send message error: {ex.Message}");
-            }
+            throw new InvalidOperationException("Not connected to chat server");
+        }
+
+        if (string.IsNullOrWhiteSpace(message))
+        {
+            throw new ArgumentException("Message cannot be empty");
+        }
+
+        try
+        {
+            await _hubConnection.InvokeAsync("SendMessage", houseId, message);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error sending message: {ex.Message}");
+            throw;
         }
     }
 

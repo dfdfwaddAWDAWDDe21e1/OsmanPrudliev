@@ -162,17 +162,22 @@
                                 FontSize="16"/>
                 </Border>
 
-                <Picker
-                    Title="Select User Type"
-                    ItemsSource="{Binding Source={x:Static models:UserType.Student}}"
-                    SelectedItem="{Binding SelectedUserType}">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type models:UserType}">
-                            <models:UserType>Student</models:UserType>
-                            <models:UserType>Landlord</models:UserType>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
+                <!-- User Type Selection -->
+                <Label Text="I am a" 
+                       FontSize="14" 
+                       TextColor="{StaticResource TextMuted}" 
+                       Margin="0,16,0,8"/>
+
+                <HorizontalStackLayout Spacing="10" Margin="0,0,0,16">
+                    <RadioButton Content="Student" 
+                                 GroupName="UserType"
+                                 IsChecked="{Binding IsStudent}"
+                                 TextColor="{StaticResource TextPrimary}"/>
+                    <RadioButton Content="Landlord" 
+                                 GroupName="UserType"
+                                 IsChecked="{Binding IsLandlord}"
+                                 TextColor="{StaticResource TextPrimary}"/>
+                </HorizontalStackLayout>
 
                 <Label Text="Password" 
                        FontSize="14" 

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.SignalR;
 using HouseApp.API.Data;
 using HouseApp.API.Models;
 using HouseApp.API.DTOs;
+using System.Security.Claims;
 
 namespace HouseApp.API.Hubs;
 
@@ -24,14 +25,17 @@ public class ChatHub : Hub
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, $"House_{houseId}");
     }
 
-    public async Task SendMessage(MessageDto messageDto)
+    public async Task SendMessage(int houseId, string messageText)
     {
+        var userId = int.Parse(Context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+        var userName = Context.User?.FindFirst(ClaimTypes.Email)?.Value ?? "Unknown";
+
         var message = new Message
         {
-            HouseId = messageDto.HouseId,
-            SenderId = messageDto.SenderId,
-            SenderName = messageDto.SenderName,
-            MessageText = messageDto.MessageText,
+            HouseId = houseId,
+            SenderId = userId,
+            SenderName = userName,
+            MessageText = messageText,
             Timestamp = DateTime.UtcNow,
             IsRead = false
         };
@@ -39,10 +43,17 @@ public class ChatHub : Hub
         _context.Messages.Add(message);
         await _context.SaveChangesAsync();
 
-        messageDto.Id = message.Id;
-        messageDto.Timestamp = message.Timestamp;
-
-        await Clients.Group($"House_{messageDto.HouseId}").SendAsync("ReceiveMessage", messageDto);
+        // Broadcast to all clients in the house chat
+        await Clients.Group($"House_{houseId}").SendAsync("ReceiveMessage", new MessageDto
+        {
+            Id = message.Id,
+            HouseId = message.HouseId,
+            SenderId = message.SenderId,
+            SenderName = message.SenderName,
+            MessageText = message.MessageText,
+            Timestamp = message.Timestamp,
+            IsRead = message.IsRead
+        });
     }
 
     public async Task MarkMessageAsRead(int messageId)
