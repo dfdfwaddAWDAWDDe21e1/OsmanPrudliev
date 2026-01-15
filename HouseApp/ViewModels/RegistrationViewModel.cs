@@ -114,6 +114,9 @@ public partial class RegistrationViewModel : ObservableObject
                 // Store user type in SecureStorage
                 await SecureStorage.SetAsync(Constants.UserTypeKey, result.Data.UserType.ToString());
 
+                System.Diagnostics.Debug.WriteLine($"Login - User Type: {result.Data.UserType}");
+                System.Diagnostics.Debug.WriteLine($"Login - User ID: {result.Data.UserId}");
+
                 try
                 {
                     // Switch to the appropriate shell for the user type
@@ -125,19 +128,23 @@ public partial class RegistrationViewModel : ObservableObject
                         // Navigate based on user type
                         if (result.Data.UserType == UserType.Landlord)
                         {
+                            System.Diagnostics.Debug.WriteLine("Navigating landlord to: ///tabs/dashboard");
                             await Shell.Current.GoToAsync("///tabs/dashboard");
                         }
                         else // Student
                         {
                             // Check if student is in a house
                             var isInHouse = await CheckIfStudentInHouse(result.Data.UserId);
+                            System.Diagnostics.Debug.WriteLine($"Student is in house: {isInHouse}");
                             
                             if (isInHouse)
                             {
+                                System.Diagnostics.Debug.WriteLine("Navigating student to: ///tabs/home");
                                 await Shell.Current.GoToAsync("///tabs/home");
                             }
                             else
                             {
+                                System.Diagnostics.Debug.WriteLine("Navigating student to: //housesearch");
                                 await Shell.Current.GoToAsync("//housesearch");
                             }
                         }
@@ -150,6 +157,7 @@ public partial class RegistrationViewModel : ObservableObject
                 catch (Exception navEx)
                 {
                     System.Diagnostics.Debug.WriteLine($"Navigation error: {navEx.Message}");
+                    System.Diagnostics.Debug.WriteLine($"Navigation stack trace: {navEx.StackTrace}");
                     await Application.Current!.MainPage!.DisplayAlert("Error", $"Navigation failed: {navEx.Message}", "OK");
                 }
             }
@@ -207,6 +215,9 @@ public partial class RegistrationViewModel : ObservableObject
                 // Store user type in SecureStorage
                 await SecureStorage.SetAsync(Constants.UserTypeKey, result.Data.UserType.ToString());
 
+                System.Diagnostics.Debug.WriteLine($"Register - User Type: {result.Data.UserType}");
+                System.Diagnostics.Debug.WriteLine($"Register - User ID: {result.Data.UserId}");
+
                 try
                 {
                     // Switch to the appropriate shell for the user type
@@ -218,21 +229,13 @@ public partial class RegistrationViewModel : ObservableObject
                         // Navigate based on user type
                         if (result.Data.UserType == UserType.Landlord)
                         {
+                            System.Diagnostics.Debug.WriteLine("Navigating landlord to: ///tabs/dashboard");
                             await Shell.Current.GoToAsync("///tabs/dashboard");
                         }
-                        else // Student
+                        else // Student - always go to house search for new accounts
                         {
-                            // Check if student is in a house
-                            var isInHouse = await CheckIfStudentInHouse(result.Data.UserId);
-                            
-                            if (isInHouse)
-                            {
-                                await Shell.Current.GoToAsync("///tabs/home");
-                            }
-                            else
-                            {
-                                await Shell.Current.GoToAsync("//housesearch");
-                            }
+                            System.Diagnostics.Debug.WriteLine("Navigating new student to: //housesearch");
+                            await Shell.Current.GoToAsync("//housesearch");
                         }
                     }
                     else
@@ -243,6 +246,7 @@ public partial class RegistrationViewModel : ObservableObject
                 catch (Exception navEx)
                 {
                     System.Diagnostics.Debug.WriteLine($"Navigation error: {navEx.Message}");
+                    System.Diagnostics.Debug.WriteLine($"Navigation stack trace: {navEx.StackTrace}");
                     await Application.Current!.MainPage!.DisplayAlert("Error", $"Navigation failed: {navEx.Message}", "OK");
                 }
             }

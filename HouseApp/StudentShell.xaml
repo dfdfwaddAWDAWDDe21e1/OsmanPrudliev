@@ -25,6 +25,11 @@
         </ResourceDictionary>
     </Shell.Resources>
 
+    <!-- House Search for Students not in a house -->
+    <ShellContent
+        Route="housesearch"
+        ContentTemplate="{DataTemplate views:HouseSearchPage}" />
+
     <TabBar Route="tabs">
         <ShellContent
             Title="Home"

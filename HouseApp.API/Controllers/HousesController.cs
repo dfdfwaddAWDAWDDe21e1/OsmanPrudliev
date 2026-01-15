@@ -42,6 +42,39 @@ public class HousesController : ControllerBase
         return Ok(houses);
     }
 
+    [HttpGet("my-houses")]
+    [Authorize(Roles = "Landlord")]
+    public async Task<ActionResult<IEnumerable<HouseDto>>> GetMyHouses()
+    {
+        var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+                       ?? User.FindFirst("sub")?.Value;
+        
+        if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+        {
+            return Unauthorized(new { message = "User ID not found in token" });
+        }
+
+        var houses = await _context.Houses
+            .Include(h => h.HouseTenants)
+            .Where(h => h.LandlordId == userId)
+            .Select(h => new HouseDto
+            {
+                Id = h.Id,
+                Name = h.Name,
+                Address = h.Address,
+                LandlordId = h.LandlordId,
+                MonthlyRent = h.MonthlyRent,
+                UtilitiesCost = h.UtilitiesCost,
+                WaterBillCost = h.WaterBillCost,
+                MaxOccupants = h.MaxOccupants,
+                CurrentOccupants = h.HouseTenants.Count(ht => ht.IsActive),
+                CreatedDate = h.CreatedDate
+            })
+            .ToListAsync();
+
+        return Ok(houses);
+    }
+
     [HttpGet("{id}")]
     public async Task<ActionResult<HouseDto>> GetHouse(int id)
     {

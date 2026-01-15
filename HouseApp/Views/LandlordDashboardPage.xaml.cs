@@ -15,6 +15,7 @@ public partial class LandlordDashboardPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await _viewModel.InitializeAsync();
+        // Reload houses every time the page appears
+        await _viewModel.LoadHousesCommand.ExecuteAsync(null);
     }
 }
