@@ -17,16 +17,125 @@
                 FontAttributes="Bold"
                 TextColor="{StaticResource TextPrimary}" />
 
-            <Frame CornerRadius="16" Padding="16" BackgroundColor="{StaticResource CardBg}" HasShadow="True">
-                <VerticalStackLayout Spacing="12">
-                    <Entry Placeholder="House Name" Text="{Binding HouseName}" />
-                    <Entry Placeholder="Address" Text="{Binding Address}" />
-                    <Entry Placeholder="Monthly Rent" Text="{Binding MonthlyRent}" Keyboard="{x:Static Keyboard.Numeric}" />
-                    <Entry Placeholder="Utilities Cost" Text="{Binding UtilitiesCost}" Keyboard="{x:Static Keyboard.Numeric}" />
-                    <Entry Placeholder="Water Bill Cost" Text="{Binding WaterBillCost}" Keyboard="{x:Static Keyboard.Numeric}" />
-                    <Entry Placeholder="Max Occupants" Text="{Binding MaxOccupants}" Keyboard="{x:Static Keyboard.Numeric}" />
-                </VerticalStackLayout>
-            </Frame>
+            <VerticalStackLayout Spacing="15">
+                <!-- House Name -->
+                <Label Text="House Name" 
+                       FontSize="14" 
+                       TextColor="#6B7280" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="#E5E7EB" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="Enter house name"
+                           Text="{Binding HouseName}"
+                           TextColor="#111827"
+                           PlaceholderColor="#9CA3AF"
+                           BackgroundColor="Transparent"
+                           FontSize="16"/>
+                </Border>
+
+                <!-- Address -->
+                <Label Text="Address" 
+                       FontSize="14" 
+                       TextColor="#6B7280" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="#E5E7EB" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="Enter address"
+                           Text="{Binding Address}"
+                           TextColor="#111827"
+                           PlaceholderColor="#9CA3AF"
+                           BackgroundColor="Transparent"
+                           FontSize="16"/>
+                </Border>
+
+                <!-- Monthly Rent -->
+                <Label Text="Monthly Rent (€)" 
+                       FontSize="14" 
+                       TextColor="#6B7280" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="#E5E7EB" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="0.00"
+                           Text="{Binding MonthlyRent}"
+                           TextColor="#111827"
+                           PlaceholderColor="#9CA3AF"
+                           BackgroundColor="Transparent"
+                           FontSize="16"
+                           Keyboard="{x:Static Keyboard.Numeric}"/>
+                </Border>
+
+                <!-- Utilities Cost -->
+                <Label Text="Utilities Cost (€)" 
+                       FontSize="14" 
+                       TextColor="#6B7280" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="#E5E7EB" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="0.00"
+                           Text="{Binding UtilitiesCost}"
+                           TextColor="#111827"
+                           PlaceholderColor="#9CA3AF"
+                           BackgroundColor="Transparent"
+                           FontSize="16"
+                           Keyboard="{x:Static Keyboard.Numeric}"/>
+                </Border>
+
+                <!-- Water Bill Cost -->
+                <Label Text="Water Bill Cost (€)" 
+                       FontSize="14" 
+                       TextColor="#6B7280" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="#E5E7EB" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="0.00"
+                           Text="{Binding WaterBillCost}"
+                           TextColor="#111827"
+                           PlaceholderColor="#9CA3AF"
+                           BackgroundColor="Transparent"
+                           FontSize="16"
+                           Keyboard="{x:Static Keyboard.Numeric}"/>
+                </Border>
+
+                <!-- Max Occupants -->
+                <Label Text="Maximum Occupants" 
+                       FontSize="14" 
+                       TextColor="#6B7280" 
+                       Margin="0,8,0,4"/>
+                <Border StrokeThickness="1" 
+                        Stroke="#E5E7EB" 
+                        BackgroundColor="White"
+                        Padding="12"
+                        Margin="0,8"
+                        StrokeShape="RoundRectangle 8">
+                    <Entry Placeholder="0"
+                           Text="{Binding MaxOccupants}"
+                           TextColor="#111827"
+                           PlaceholderColor="#9CA3AF"
+                           BackgroundColor="Transparent"
+                           FontSize="16"
+                           Keyboard="{x:Static Keyboard.Numeric}"/>
+                </Border>
+            </VerticalStackLayout>
 
             <Button
                 Text="Save House"

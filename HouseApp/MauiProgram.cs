@@ -42,6 +42,7 @@ public static class MauiProgram
         builder.Services.AddTransient<LandlordDashboardViewModel>();
         builder.Services.AddTransient<HouseManagementViewModel>();
         builder.Services.AddTransient<PaymentViewModel>();
+        builder.Services.AddTransient<HouseSearchViewModel>();
 
         // Views (Pages)
         builder.Services.AddSingleton<LoginPage>();
@@ -57,6 +58,7 @@ public static class MauiProgram
         builder.Services.AddTransient<LandlordDashboardPage>();
         builder.Services.AddTransient<HouseManagementPage>();
         builder.Services.AddTransient<PaymentPage>();
+        builder.Services.AddTransient<HouseSearchPage>();
 
         return builder.Build();
     }

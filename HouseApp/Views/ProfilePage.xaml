@@ -51,17 +51,19 @@
                     <VerticalStackLayout Grid.Column="1" Spacing="6">
                         <Label Text="Name"
                                FontSize="12"
-                               TextColor="{StaticResource TextMuted}" />
-                        <Frame CornerRadius="14"
-                               Padding="10,8"
-                               BackgroundColor="White"
-                               BorderColor="{StaticResource Border}"
-                               HasShadow="False">
+                               TextColor="#6B7280" />
+                        <Border StrokeThickness="1" 
+                                Stroke="#E5E7EB" 
+                                BackgroundColor="White"
+                                Padding="12"
+                                StrokeShape="RoundRectangle 8">
                             <Entry Placeholder="Your name"
                                    Text="{Binding FirstName}"
-                                   TextColor="{StaticResource TextPrimary}"
-                                   PlaceholderColor="{StaticResource TextMuted}" />
-                        </Frame>
+                                   TextColor="#111827"
+                                   PlaceholderColor="#9CA3AF"
+                                   BackgroundColor="Transparent"
+                                   FontSize="16" />
+                        </Border>
                     </VerticalStackLayout>
 
                     <!-- Change photo button -->

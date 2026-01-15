@@ -10,6 +10,7 @@ public partial class RegistrationViewModel : ObservableObject
 {
     private readonly AuthService _authService;
     private readonly UserSession _userSession;
+    private readonly ApiService _apiService;
 
     [ObservableProperty]
     private string email = string.Empty;
@@ -66,10 +67,24 @@ public partial class RegistrationViewModel : ObservableObject
     [ObservableProperty]
     private bool isLoginMode = true;
 
-    public RegistrationViewModel(AuthService authService, UserSession userSession)
+    public RegistrationViewModel(AuthService authService, UserSession userSession, ApiService apiService)
     {
         _authService = authService;
         _userSession = userSession;
+        _apiService = apiService;
+    }
+
+    private async Task<bool> CheckIfStudentInHouse(int studentId)
+    {
+        try
+        {
+            var houseTenant = await _apiService.GetAsync<HouseTenantDto>($"/api/houses/student/{studentId}/house");
+            return houseTenant != null;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     [RelayCommand]
@@ -114,7 +129,17 @@ public partial class RegistrationViewModel : ObservableObject
                         }
                         else // Student
                         {
-                            await Shell.Current.GoToAsync("///tabs/home");
+                            // Check if student is in a house
+                            var isInHouse = await CheckIfStudentInHouse(result.Data.UserId);
+                            
+                            if (isInHouse)
+                            {
+                                await Shell.Current.GoToAsync("///tabs/home");
+                            }
+                            else
+                            {
+                                await Shell.Current.GoToAsync("//housesearch");
+                            }
                         }
                     }
                     else
@@ -197,7 +222,17 @@ public partial class RegistrationViewModel : ObservableObject
                         }
                         else // Student
                         {
-                            await Shell.Current.GoToAsync("///tabs/home");
+                            // Check if student is in a house
+                            var isInHouse = await CheckIfStudentInHouse(result.Data.UserId);
+                            
+                            if (isInHouse)
+                            {
+                                await Shell.Current.GoToAsync("///tabs/home");
+                            }
+                            else
+                            {
+                                await Shell.Current.GoToAsync("//housesearch");
+                            }
                         }
                     }
                     else
