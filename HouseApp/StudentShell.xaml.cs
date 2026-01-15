@@ -8,6 +8,7 @@ namespace HouseApp
         {
             InitializeComponent();
 
+            Routing.RegisterRoute("housesearch", typeof(HouseSearchPage));
             Routing.RegisterRoute("housemanagement", typeof(HouseManagementPage));
             Routing.RegisterRoute("payment", typeof(PaymentPage));
         }

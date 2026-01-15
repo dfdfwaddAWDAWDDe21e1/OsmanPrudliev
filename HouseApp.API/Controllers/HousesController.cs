@@ -236,4 +236,95 @@ public class HousesController : ControllerBase
             JoinedDate = houseTenant.JoinedDate
         });
     }
+
+    [HttpGet("available")]
+    public async Task<ActionResult<IEnumerable<HouseDto>>> GetAvailableHouses()
+    {
+        var houses = await _context.Houses
+            .Include(h => h.HouseTenants)
+            .Where(h => h.HouseTenants.Count(ht => ht.IsActive) < h.MaxOccupants)
+            .Select(h => new HouseDto
+            {
+                Id = h.Id,
+                Name = h.Name,
+                Address = h.Address,
+                MonthlyRent = h.MonthlyRent,
+                UtilitiesCost = h.UtilitiesCost,
+                WaterBillCost = h.WaterBillCost,
+                MaxOccupants = h.MaxOccupants,
+                CurrentOccupants = h.HouseTenants.Count(ht => ht.IsActive)
+            })
+            .ToListAsync();
+
+        return Ok(houses);
+    }
+
+    [HttpPost("join")]
+    public async Task<IActionResult> JoinHouseByCode([FromBody] JoinHouseByCodeDto dto)
+    {
+        var house = await _context.Houses
+            .Include(h => h.HouseTenants)
+            .FirstOrDefaultAsync(h => h.HouseCode == dto.HouseCode);
+
+        if (house == null)
+            return NotFound(new { message = "Invalid house code" });
+
+        if (house.HouseTenants.Count(ht => ht.IsActive) >= house.MaxOccupants)
+            return BadRequest(new { message = "House is full" });
+
+        var existingTenant = await _context.HouseTenants
+            .AnyAsync(ht => ht.StudentId == dto.StudentId && ht.IsActive);
+
+        if (existingTenant)
+            return BadRequest(new { message = "You are already in a house" });
+
+        var houseTenant = new HouseTenant
+        {
+            HouseId = house.Id,
+            StudentId = dto.StudentId,
+            JoinedDate = DateTime.UtcNow,
+            IsActive = true
+        };
+
+        _context.HouseTenants.Add(houseTenant);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Successfully joined house" });
+    }
+
+    [HttpPost("{houseId}/join")]
+    public async Task<IActionResult> JoinHouseByPassword(int houseId, [FromBody] JoinHouseByPasswordDto dto)
+    {
+        var house = await _context.Houses
+            .Include(h => h.HouseTenants)
+            .FirstOrDefaultAsync(h => h.Id == houseId);
+
+        if (house == null)
+            return NotFound(new { message = "House not found" });
+
+        if (house.Password != dto.Password)
+            return BadRequest(new { message = "Incorrect password" });
+
+        if (house.HouseTenants.Count(ht => ht.IsActive) >= house.MaxOccupants)
+            return BadRequest(new { message = "House is full" });
+
+        var existingTenant = await _context.HouseTenants
+            .AnyAsync(ht => ht.StudentId == dto.StudentId && ht.IsActive);
+
+        if (existingTenant)
+            return BadRequest(new { message = "You are already in a house" });
+
+        var houseTenant = new HouseTenant
+        {
+            HouseId = house.Id,
+            StudentId = dto.StudentId,
+            JoinedDate = DateTime.UtcNow,
+            IsActive = true
+        };
+
+        _context.HouseTenants.Add(houseTenant);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { message = "Successfully joined house" });
+    }
 }

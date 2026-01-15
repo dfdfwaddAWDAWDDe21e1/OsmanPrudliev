@@ -11,6 +11,8 @@ public class House
     public decimal WaterBillCost { get; set; }
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
     public int MaxOccupants { get; set; }
+    public string? Password { get; set; }
+    public string? HouseCode { get; set; }
 
     public User Landlord { get; set; } = null!;
     public ICollection<HouseTenant> HouseTenants { get; set; } = new List<HouseTenant>();
