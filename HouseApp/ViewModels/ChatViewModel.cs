@@ -24,6 +24,9 @@ public partial class ChatViewModel : ObservableObject
     [ObservableProperty]
     private bool isConnected;
 
+    [ObservableProperty]
+    private string connectionStatus = "Connecting...";
+
     public ChatViewModel(ChatService chatService, AuthService authService, HouseService houseService)
     {
         _chatService = chatService;
@@ -31,6 +34,7 @@ public partial class ChatViewModel : ObservableObject
         _houseService = houseService;
 
         _chatService.MessageReceived += OnMessageReceived;
+        _chatService.ConnectionStatusChanged += OnConnectionStatusChanged;
     }
 
     public async Task InitializeAsync()
@@ -46,11 +50,27 @@ public partial class ChatViewModel : ObservableObject
                 await _chatService.InitializeAsync(CurrentHouseId);
                 IsConnected = _chatService.IsConnected;
             }
+            else
+            {
+                ConnectionStatus = "No house assigned";
+                IsConnected = false;
+            }
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Chat initialization error: {ex.Message}");
+            ConnectionStatus = $"Error: {ex.Message}";
+            IsConnected = false;
         }
+    }
+
+    private void OnConnectionStatusChanged(string status)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            ConnectionStatus = status;
+            IsConnected = status == "Connected";
+        });
     }
 
     private void OnMessageReceived(ChatMessage message)
@@ -64,7 +84,7 @@ public partial class ChatViewModel : ObservableObject
     [RelayCommand]
     private async Task SendMessageAsync()
     {
-        if (string.IsNullOrWhiteSpace(MessageText)) return;
+        if (string.IsNullOrWhiteSpace(MessageText) || !IsConnected) return;
 
         try
         {
@@ -81,5 +101,6 @@ public partial class ChatViewModel : ObservableObject
     {
         await _chatService.DisconnectAsync();
         _chatService.MessageReceived -= OnMessageReceived;
+        _chatService.ConnectionStatusChanged -= OnConnectionStatusChanged;
     }
 }
