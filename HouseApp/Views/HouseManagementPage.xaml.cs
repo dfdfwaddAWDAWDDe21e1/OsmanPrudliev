@@ -18,20 +18,6 @@ public partial class HouseManagementPage : ContentPage
             {
                 _viewModel.HouseId = value;
                 _viewModel.IsEditMode = value > 0;
-                if (value > 0)
-                {
-                    Task.Run(async () =>
-                    {
-                        try
-                        {
-                            await _viewModel.LoadHouseDetailsCommand.ExecuteAsync(null);
-                        }
-                        catch (Exception ex)
-                        {
-                            System.Diagnostics.Debug.WriteLine($"Error loading house details: {ex.Message}");
-                        }
-                    });
-                }
             }
         }
     }
@@ -41,5 +27,23 @@ public partial class HouseManagementPage : ContentPage
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        
+        if (_viewModel.IsEditMode && _viewModel.HouseId > 0)
+        {
+            try
+            {
+                await _viewModel.LoadHouseDetailsCommand.ExecuteAsync(null);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error loading house details: {ex.Message}");
+                await DisplayAlert("Error", "Failed to load house details", "OK");
+            }
+        }
     }
 }

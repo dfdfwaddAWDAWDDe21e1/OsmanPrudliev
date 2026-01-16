@@ -205,9 +205,9 @@ public partial class HouseManagementViewModel : ObservableObject
             }
 
             // Add tenant
-            var response = await _apiService.PostAsync<object>($"/api/houses/{HouseId}/tenants/{student.Id}", null);
+            var success = await _apiService.PostAsync($"/api/houses/{HouseId}/tenants/{student.Id}", (object?)null);
 
-            if (response != null)
+            if (success)
             {
                 await Shell.Current.DisplayAlert("Success", $"Added {student.FirstName} {student.LastName} to house", "OK");
                 StudentEmail = string.Empty;

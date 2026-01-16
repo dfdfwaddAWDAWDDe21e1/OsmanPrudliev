@@ -144,19 +144,17 @@ public class HousesController : ControllerBase
         do
         {
             var result = new char[6];
-            var bytes = new byte[6];
+            byte randomByte;
             
             for (int i = 0; i < 6; i++)
             {
-                int randomValue;
                 do
                 {
-                    System.Security.Cryptography.RandomNumberGenerator.Fill(bytes.AsSpan(0, 1));
-                    randomValue = bytes[0];
+                    randomByte = (byte)System.Security.Cryptography.RandomNumberGenerator.GetInt32(256);
                 }
-                while (randomValue >= 256 - (256 % chars.Length)); // Rejection sampling to avoid bias
+                while (randomByte >= 256 - (256 % chars.Length)); // Rejection sampling to avoid bias
                 
-                result[i] = chars[randomValue % chars.Length];
+                result[i] = chars[randomByte % chars.Length];
             }
             
             code = new string(result);
