@@ -98,7 +98,9 @@ public class HousesController : ControllerBase
             WaterBillCost = house.WaterBillCost,
             MaxOccupants = house.MaxOccupants,
             CurrentOccupants = house.HouseTenants.Count(ht => ht.IsActive),
-            CreatedDate = house.CreatedDate
+            CreatedDate = house.CreatedDate,
+            HouseCode = house.HouseCode,
+            Password = house.Password
         };
 
         return Ok(houseDto);
@@ -117,6 +119,8 @@ public class HousesController : ControllerBase
             UtilitiesCost = dto.UtilitiesCost,
             WaterBillCost = dto.WaterBillCost,
             MaxOccupants = dto.MaxOccupants,
+            Password = dto.Password,
+            HouseCode = GenerateHouseCode(),
             CreatedDate = DateTime.UtcNow
         };
 
@@ -126,13 +130,31 @@ public class HousesController : ControllerBase
         dto.Id = house.Id;
         dto.CreatedDate = house.CreatedDate;
         dto.CurrentOccupants = 0;
+        dto.HouseCode = house.HouseCode;
 
         return CreatedAtAction(nameof(GetHouse), new { id = house.Id }, dto);
     }
 
+    private string GenerateHouseCode()
+    {
+        // Generate a unique 6-character code
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var random = new Random();
+        string code;
+        
+        do
+        {
+            code = new string(Enumerable.Repeat(chars, 6)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        while (_context.Houses.Any(h => h.HouseCode == code)); // Ensure unique
+        
+        return code;
+    }
+
     [HttpPut("{id}")]
     [Authorize(Roles = "Landlord")]
-    public async Task<IActionResult> UpdateHouse(int id, HouseDto dto)
+    public async Task<IActionResult> UpdateHouse(int id, UpdateHouseDto dto)
     {
         var house = await _context.Houses.FindAsync(id);
         if (house == null)
@@ -146,6 +168,7 @@ public class HousesController : ControllerBase
         house.UtilitiesCost = dto.UtilitiesCost;
         house.WaterBillCost = dto.WaterBillCost;
         house.MaxOccupants = dto.MaxOccupants;
+        house.Password = dto.Password;
 
         await _context.SaveChangesAsync();
 
@@ -227,6 +250,24 @@ public class HousesController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet("{houseId}/tenants")]
+    public async Task<ActionResult<IEnumerable<TenantDto>>> GetHouseTenants(int houseId)
+    {
+        var tenants = await _context.HouseTenants
+            .Include(ht => ht.Student)
+            .Where(ht => ht.HouseId == houseId && ht.IsActive)
+            .Select(ht => new TenantDto
+            {
+                UserId = ht.StudentId,
+                Name = $"{ht.Student.FirstName} {ht.Student.LastName}",
+                Email = ht.Student.Email,
+                JoinedDate = ht.JoinedDate
+            })
+            .ToListAsync();
+
+        return Ok(tenants);
+    }
+
     [HttpGet("{houseId}/messages")]
     public async Task<ActionResult<IEnumerable<MessageDto>>> GetHouseMessages(int houseId)
     {
@@ -285,7 +326,9 @@ public class HousesController : ControllerBase
                 UtilitiesCost = h.UtilitiesCost,
                 WaterBillCost = h.WaterBillCost,
                 MaxOccupants = h.MaxOccupants,
-                CurrentOccupants = h.HouseTenants.Count(ht => ht.IsActive)
+                CurrentOccupants = h.HouseTenants.Count(ht => ht.IsActive),
+                HouseCode = h.HouseCode
+                // Don't expose password in list
             })
             .ToListAsync();
 
