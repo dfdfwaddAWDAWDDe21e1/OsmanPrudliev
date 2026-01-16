@@ -180,6 +180,12 @@ public class ChatHub : Hub
             throw new HubException("User not authenticated");
         }
 
-        return int.Parse(userIdClaim);
+        if (!int.TryParse(userIdClaim, out int userId))
+        {
+            _logger.LogError($"Invalid user ID format in claims: {userIdClaim}");
+            throw new HubException("Invalid user ID");
+        }
+
+        return userId;
     }
 }

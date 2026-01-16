@@ -44,7 +44,7 @@ public class ChatService
                 .WithUrl($"{Constants.ApiBaseUrl}/hubs/chat", options =>
                 {
                     // CRITICAL: Pass token as query parameter for SignalR
-                    options.AccessTokenProvider = () => Task.FromResult(token)!;
+                    options.AccessTokenProvider = () => Task.FromResult<string?>(token);
                     
                     // For development with self-signed certificates
                     options.HttpMessageHandlerFactory = (handler) =>
