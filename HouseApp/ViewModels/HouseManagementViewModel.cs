@@ -146,7 +146,8 @@ public partial class HouseManagementViewModel : ObservableObject
                 var landlordIdStr = await SecureStorage.GetAsync(Constants.UserIdKey);
                 if (string.IsNullOrEmpty(landlordIdStr) || !int.TryParse(landlordIdStr, out int landlordId))
                 {
-                    await Shell.Current.DisplayAlert("Error", "Failed to retrieve landlord information. Please log in again.", "OK");
+                    await Shell.Current.DisplayAlert("Session Expired", "Please log in again to continue.", "OK");
+                    await Shell.Current.GoToAsync("//login");
                     return;
                 }
 

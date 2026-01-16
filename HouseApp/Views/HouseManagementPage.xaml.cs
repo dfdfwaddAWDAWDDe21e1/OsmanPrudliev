@@ -20,7 +20,17 @@ public partial class HouseManagementPage : ContentPage
                 _viewModel.IsEditMode = value > 0;
                 if (value > 0)
                 {
-                    _ = _viewModel.LoadHouseDetailsCommand.ExecuteAsync(null);
+                    Task.Run(async () =>
+                    {
+                        try
+                        {
+                            await _viewModel.LoadHouseDetailsCommand.ExecuteAsync(null);
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Error loading house details: {ex.Message}");
+                        }
+                    });
                 }
             }
         }
