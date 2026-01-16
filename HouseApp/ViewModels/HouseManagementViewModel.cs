@@ -265,10 +265,10 @@ public partial class HouseManagementViewModel : ObservableObject
 
         if (!confirm) return;
 
-        IsLoading = true;
-
         try
         {
+            IsLoading = true;
+            
             var success = await _apiService.DeleteAsync($"/api/houses/{HouseId}");
             if (success)
             {
@@ -279,6 +279,10 @@ public partial class HouseManagementViewModel : ObservableObject
             {
                 await Shell.Current.DisplayAlert("Error", "Failed to delete house", "OK");
             }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", $"Failed to delete house: {ex.Message}", "OK");
         }
         finally
         {

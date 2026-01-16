@@ -144,10 +144,7 @@ public class HousesController : ControllerBase
         do
         {
             var bytes = new byte[6];
-            using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(bytes);
-            }
+            System.Security.Cryptography.RandomNumberGenerator.Fill(bytes);
             
             code = new string(bytes.Select(b => chars[b % chars.Length]).ToArray());
         }

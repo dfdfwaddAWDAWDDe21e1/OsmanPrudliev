@@ -5,7 +5,7 @@
              xmlns:dtos="clr-namespace:HouseApp.DTOs"
              x:Class="HouseApp.Views.HouseManagementPage"
              x:DataType="viewmodels:HouseManagementViewModel"
-             Title="Manage House"
+             Title="{Binding IsEditMode, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='Edit House|Add House'}"
              BackgroundColor="#F5F6FA">
 
     <ScrollView>
