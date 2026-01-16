@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:HouseApp.ViewModels"
+             xmlns:dtos="clr-namespace:HouseApp.DTOs"
+             x:Class="HouseApp.Views.HouseManagementPage"
+             x:DataType="viewmodels:HouseManagementViewModel"
+             Title="{Binding IsEditMode, Converter={StaticResource BoolToObjectConverter}, ConverterParameter='Edit House|Add House'}"
+             BackgroundColor="#F5F6FA">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <!-- House Details Section -->
+            <Border BackgroundColor="White"
+                    StrokeThickness="1"
+                    Stroke="#E5E7EB"
+                    Padding="16"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="House Details" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+                    <!-- House Name -->
+                    <Label Text="House Name" 
+                           FontSize="14" 
+                           TextColor="#6B7280"/>
+                    <Border StrokeThickness="1" 
+                            Stroke="#E5E7EB" 
+                            BackgroundColor="White"
+                            Padding="12"
+                            StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding HouseName}"
+                               Placeholder="Enter house name"
+                               TextColor="#111827"
+                               PlaceholderColor="#9CA3AF"
+                               BackgroundColor="Transparent"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- Address -->
+                    <Label Text="Address" 
+                           FontSize="14" 
+                           TextColor="#6B7280"
+                           Margin="0,8,0,0"/>
+                    <Border StrokeThickness="1" 
+                            Stroke="#E5E7EB" 
+                            BackgroundColor="White"
+                            Padding="12"
+                            StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding Address}"
+                               Placeholder="Enter address"
+                               TextColor="#111827"
+                               PlaceholderColor="#9CA3AF"
+                               BackgroundColor="Transparent"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- Monthly Rent -->
+                    <Label Text="Monthly Rent (€)" 
+                           FontSize="14" 
+                           TextColor="#6B7280"
+                           Margin="0,8,0,0"/>
+                    <Border StrokeThickness="1" 
+                            Stroke="#E5E7EB" 
+                            BackgroundColor="White"
+                            Padding="12"
+                            StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding MonthlyRent}"
+                               Keyboard="Numeric"
+                               Placeholder="0.00"
+                               TextColor="#111827"
+                               PlaceholderColor="#9CA3AF"
+                               BackgroundColor="Transparent"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- Utilities Cost -->
+                    <Label Text="Utilities Cost (€)" 
+                           FontSize="14" 
+                           TextColor="#6B7280"
+                           Margin="0,8,0,0"/>
+                    <Border StrokeThickness="1" 
+                            Stroke="#E5E7EB" 
+                            BackgroundColor="White"
+                            Padding="12"
+                            StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding UtilitiesCost}"
+                               Keyboard="Numeric"
+                               Placeholder="0.00"
+                               TextColor="#111827"
+                               PlaceholderColor="#9CA3AF"
+                               BackgroundColor="Transparent"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- Water Bill -->
+                    <Label Text="Water Bill (€)" 
+                           FontSize="14" 
+                           TextColor="#6B7280"
+                           Margin="0,8,0,0"/>
+                    <Border StrokeThickness="1" 
+                            Stroke="#E5E7EB" 
+                            BackgroundColor="White"
+                            Padding="12"
+                            StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding WaterBillCost}"
+                               Keyboard="Numeric"
+                               Placeholder="0.00"
+                               TextColor="#111827"
+                               PlaceholderColor="#9CA3AF"
+                               BackgroundColor="Transparent"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- Max Occupants -->
+                    <Label Text="Max Occupants" 
+                           FontSize="14" 
+                           TextColor="#6B7280"
+                           Margin="0,8,0,0"/>
+                    <Border StrokeThickness="1" 
+                            Stroke="#E5E7EB" 
+                            BackgroundColor="White"
+                            Padding="12"
+                            StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding MaxOccupants}"
+                               Keyboard="Numeric"
+                               Placeholder="0"
+                               TextColor="#111827"
+                               PlaceholderColor="#9CA3AF"
+                               BackgroundColor="Transparent"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- House Password -->
+                    <Label Text="House Password (optional - for students to join)" 
+                           FontSize="14" 
+                           TextColor="#6B7280"
+                           Margin="0,8,0,0"/>
+                    <Border StrokeThickness="1" 
+                            Stroke="#E5E7EB" 
+                            BackgroundColor="White"
+                            Padding="12"
+                            StrokeShape="RoundRectangle 8">
+                        <Entry Text="{Binding HousePassword}"
+                               Placeholder="Enter password for students"
+                               TextColor="#111827"
+                               PlaceholderColor="#9CA3AF"
+                               BackgroundColor="Transparent"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- House Code (Read-only) -->
+                    <Label Text="House Code (Share with students)" 
+                           FontSize="14" 
+                           TextColor="#6B7280"
+                           Margin="0,8,0,0"
+                           IsVisible="{Binding IsEditMode}"/>
+                    <Border StrokeThickness="1" 
+                            Stroke="#6D28D9" 
+                            BackgroundColor="#F3E8FF"
+                            Padding="12"
+                            StrokeShape="RoundRectangle 8"
+                            IsVisible="{Binding IsEditMode}">
+                        <HorizontalStackLayout Spacing="8">
+                            <Label Text="{Binding HouseCode}"
+                                   TextColor="#6D28D9"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="FillAndExpand"/>
+                            <Label Text="📋"
+                                   FontSize="24"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Info for new houses -->
+                    <Label Text="A unique house code will be generated automatically" 
+                           FontSize="12" 
+                           TextColor="#6B7280"
+                           FontAttributes="Italic"
+                           Margin="0,8,0,0"
+                           IsVisible="{Binding IsEditMode, Converter={StaticResource InvertedBoolConverter}}"/>
+
+                    <!-- Save Button -->
+                    <Button Text="Save Changes"
+                            Command="{Binding SaveHouseCommand}"
+                            BackgroundColor="#6D28D9"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            Margin="0,16,0,0"/>
+
+                    <!-- Delete Button -->
+                    <Button Text="Delete House"
+                            Command="{Binding DeleteHouseCommand}"
+                            IsVisible="{Binding IsEditMode}"
+                            BackgroundColor="#EF4444"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            Margin="0,8,0,0"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Tenants Section -->
+            <Border BackgroundColor="White"
+                    StrokeThickness="1"
+                    Stroke="#E5E7EB"
+                    Padding="16"
+                    Margin="0,16,0,0"
+                    StrokeShape="RoundRectangle 12"
+                    IsVisible="{Binding IsEditMode}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Tenants" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           TextColor="#111827"/>
+
+                    <!-- Add Tenant -->
+                    <Label Text="Add Student by Email" 
+                           FontSize="14" 
+                           TextColor="#6B7280"/>
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Border Grid.Column="0"
+                                StrokeThickness="1" 
+                                Stroke="#E5E7EB" 
+                                BackgroundColor="White"
+                                Padding="12"
+                                StrokeShape="RoundRectangle 8">
+                            <Entry Text="{Binding StudentEmail}"
+                                   Placeholder="student@example.com"
+                                   Keyboard="Email"
+                                   TextColor="#111827"
+                                   PlaceholderColor="#9CA3AF"
+                                   BackgroundColor="Transparent"
+                                   FontSize="16"/>
+                        </Border>
+                        <Button Grid.Column="1"
+                                Text="Add"
+                                Command="{Binding AddTenantCommand}"
+                                BackgroundColor="#6D28D9"
+                                TextColor="White"
+                                CornerRadius="8"
+                                WidthRequest="80"/>
+                    </Grid>
+
+                    <!-- Tenants List -->
+                    <CollectionView ItemsSource="{Binding Tenants}"
+                                  SelectionMode="None"
+                                  Margin="0,16,0,0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="dtos:TenantDto">
+                                <Border StrokeThickness="1"
+                                        Stroke="#E5E7EB"
+                                        BackgroundColor="#F9FAFB"
+                                        Padding="12"
+                                        Margin="0,0,0,8"
+                                        StrokeShape="RoundRectangle 8">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Grid.Column="0">
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#111827"/>
+                                            <Label Text="{Binding Email}"
+                                                   FontSize="14"
+                                                   TextColor="#6B7280"/>
+                                        </VerticalStackLayout>
+                                        <Button Grid.Column="1"
+                                                Text="Remove"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HouseManagementViewModel}}, Path=RemoveTenantCommand}"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="#DC2626"
+                                                TextColor="White"
+                                                CornerRadius="6"
+                                                Padding="12,6"
+                                                FontSize="14"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Activity Indicator -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                             Color="#6D28D9"
+                             HeightRequest="40"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
