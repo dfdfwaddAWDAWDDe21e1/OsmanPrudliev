@@ -52,7 +52,8 @@ public partial class ChatViewModel : ObservableObject
             
             if (CurrentHouseId > 0)
             {
-                await _chatService.InitializeAsync(CurrentHouseId);
+                await _chatService.InitializeAsync();
+                await _chatService.JoinHouseChat(CurrentHouseId);
                 IsConnected = _chatService.IsConnected;
             }
             else

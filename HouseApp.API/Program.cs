@@ -56,10 +56,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "http://localhost:5173")
+        policy
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials();
+            .AllowCredentials()
+            .SetIsOriginAllowed(origin => true); // Allow any origin in development
     });
 });
 
@@ -67,7 +68,10 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 
 // Add SignalR
-builder.Services.AddSignalR();
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true; // Enable for debugging
+});
 
 // Add Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -82,6 +86,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
@@ -93,5 +98,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<ChatHub>("/hubs/chat");
+
+// Log that SignalR is configured
+Console.WriteLine("SignalR Hub mapped at: /hubs/chat");
+Console.WriteLine($"Server running on: https://localhost:5001");
 
 app.Run();
