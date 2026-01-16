@@ -37,8 +37,34 @@ public partial class ChatViewModel : ObservableObject
         _chatService = chatService;
         _apiService = apiService;
         
+        // === ADD TEST MESSAGES FOR DEBUGGING ===
+        System.Diagnostics.Debug.WriteLine("=== ADDING TEST MESSAGES ===");
+        
+        Messages.Add(new ChatMessageViewModel
+        {
+            Id = 1,
+            SenderId = 999,
+            SenderName = "Test User",
+            MessageText = "This is a test message - should be WHITE on PURPLE",
+            Timestamp = DateTime.Now.AddMinutes(-5),
+            IsFromCurrentUser = false
+        });
+        
+        Messages.Add(new ChatMessageViewModel
+        {
+            Id = 2,
+            SenderId = _currentUserId,
+            SenderName = "You",
+            MessageText = "This is YOUR test message",
+            Timestamp = DateTime.Now,
+            IsFromCurrentUser = true
+        });
+        
+        System.Diagnostics.Debug.WriteLine($"Messages count: {Messages.Count}");
+        // === END TEST ===
+        
         _chatService.MessageReceived += OnMessageReceived;
-        _chatService.ConnectionStatusChanged += OnConnectionStatusChanged;
+        _chatService.ConnectionStatusChanged += OnChatConnectionStatusChanged;
         
         _ = InitializeChat();
     }
@@ -118,29 +144,37 @@ public partial class ChatViewModel : ObservableObject
 
             if (messagesList != null && messagesList.Any())
             {
-                Messages.Clear();
+                // Don't clear - keep test messages
+                // Messages.Clear();
                 
-                foreach (var msg in messagesList. OrderBy(m => m.Timestamp))
+                foreach (var msg in messagesList.OrderBy(m => m.Timestamp))
                 {
-                    System.Diagnostics.Debug.WriteLine($"Message: {msg.SenderName}:  {msg.MessageText}");
+                    System.Diagnostics.Debug.WriteLine($"Message: {msg.SenderName}: {msg.MessageText}");
                     
-                    Messages.Add(new ChatMessageViewModel
+                    // Avoid duplicates
+                    if (!Messages.Any(m => m.Id == msg.Id))
                     {
-                        Id = msg.Id,
-                        SenderId = msg.SenderId,
-                        SenderName = msg. SenderName,
-                        MessageText = msg.MessageText,
-                        Timestamp = msg. Timestamp,
-                        IsFromCurrentUser = msg.SenderId == _currentUserId
-                    });
+                        Messages.Add(new ChatMessageViewModel
+                        {
+                            Id = msg.Id,
+                            SenderId = msg.SenderId,
+                            SenderName = msg.SenderName,
+                            MessageText = msg.MessageText,
+                            Timestamp = msg.Timestamp,
+                            IsFromCurrentUser = msg.SenderId == _currentUserId
+                        });
+                    }
                 }
 
                 HasNoMessages = false;
             }
             else
             {
-                Messages.Clear();
-                HasNoMessages = true;
+                // Don't clear if we have test messages
+                if (Messages.Count == 0)
+                {
+                    HasNoMessages = true;
+                }
             }
         }
         catch (Exception ex)
@@ -174,7 +208,7 @@ public partial class ChatViewModel : ObservableObject
         });
     }
 
-    private void OnConnectionStatusChanged(string status)
+    private void OnChatConnectionStatusChanged(string status)
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
@@ -246,40 +280,4 @@ public partial class ChatMessageViewModel :  ObservableObject
 
     [ObservableProperty]
     private bool isFromCurrentUser;
-}
-public ChatViewModel(ChatService chatService, ApiService apiService)
-{
-    _chatService = chatService;
-    _apiService = apiService;
-    
-    // === DEBUG:  Add test messages ===
-    System.Diagnostics.Debug.WriteLine("=== ADDING TEST MESSAGES ===");
-    
-    Messages. Add(new ChatMessageViewModel
-    {
-        Id = 1,
-        SenderId = 1,
-        SenderName = "Test User 1",
-        MessageText = "This is test message ONE - should be WHITE on PURPLE",
-        Timestamp = DateTime.Now. AddMinutes(-10),
-        IsFromCurrentUser = false
-    });
-    
-    Messages.Add(new ChatMessageViewModel
-    {
-        Id = 2,
-        SenderId = 2,
-        SenderName = "Test User 2",
-        MessageText = "This is test message TWO - also WHITE on PURPLE",
-        Timestamp = DateTime.Now,
-        IsFromCurrentUser = true
-    });
-    
-    System.Diagnostics.Debug.WriteLine($"Messages count: {Messages.Count}");
-    // === END DEBUG ===
-    
-    _chatService.MessageReceived += OnMessageReceived;
-    _chatService.ConnectionStatusChanged += OnConnectionStatusChanged;
-    
-    _ = InitializeChat();
 }
