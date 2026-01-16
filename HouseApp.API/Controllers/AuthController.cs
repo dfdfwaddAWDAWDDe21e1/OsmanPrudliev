@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using HouseApp.API.Data;
 using HouseApp.API.DTOs;
 using HouseApp.API.Models;
@@ -80,6 +81,26 @@ public class AuthController : ControllerBase
             UserType = user.UserType,
             FirstName = user.FirstName,
             LastName = user.LastName
+        });
+    }
+
+    [HttpGet("users/search")]
+    [Authorize]
+    public async Task<ActionResult<UserDto>> SearchUserByEmail([FromQuery] string email)
+    {
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => u.Email == email);
+
+        if (user == null)
+            return NotFound();
+
+        return Ok(new UserDto
+        {
+            Id = user.Id,
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            UserType = user.UserType
         });
     }
 }

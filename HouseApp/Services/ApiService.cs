@@ -83,6 +83,39 @@ public class ApiService
         }
     }
 
+    public async Task<TResponse?> PutAsync<TResponse>(string endpoint, object data)
+    {
+        try
+        {
+            await SetAuthorizationHeaderAsync();
+            var response = await _httpClient.PutAsJsonAsync(endpoint, data);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<TResponse>();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"PUT Error: {ex.Message}");
+            return default;
+        }
+    }
+
+    public async Task<TResponse?> PostAsync<TResponse>(string endpoint, object? data)
+    {
+        try
+        {
+            await SetAuthorizationHeaderAsync();
+            var response = await _httpClient.PostAsJsonAsync(endpoint, data);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadFromJsonAsync<TResponse>();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"POST Error: {ex.Message}");
+            return default;
+        }
+    }
+
+
     public async Task<bool> DeleteAsync(string endpoint)
     {
         try

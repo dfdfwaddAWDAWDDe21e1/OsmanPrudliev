@@ -12,4 +12,6 @@ public class HouseDto
     public int MaxOccupants { get; set; }
     public int? CurrentOccupants { get; set; }
     public DateTime? CreatedDate { get; set; }
+    public string? HouseCode { get; set; }
+    public string? Password { get; set; }
 }

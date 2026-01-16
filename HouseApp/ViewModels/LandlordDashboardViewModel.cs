@@ -124,7 +124,22 @@ public partial class LandlordDashboardViewModel : ObservableObject
     [RelayCommand]
     private async Task NavigateToHouseManagement(House house)
     {
-        await Shell.Current.GoToAsync($"housemanagement?houseId={house.Id}");
+        if (house == null)
+        {
+            await Application.Current!.MainPage!.DisplayAlert("Error", "Invalid house selected", "OK");
+            return;
+        }
+
+        try
+        {
+            // Use proper navigation with parameters
+            await Shell.Current.GoToAsync($"housemanagement?HouseId={house.Id}");
+        }
+        catch (Exception ex)
+        {
+            await Application.Current!.MainPage!.DisplayAlert("Error", $"Failed to open house management: {ex.Message}", "OK");
+            System.Diagnostics.Debug.WriteLine($"Navigation error: {ex}");
+        }
     }
 
     [RelayCommand]
