@@ -137,15 +137,19 @@ public class HousesController : ControllerBase
 
     private string GenerateHouseCode()
     {
-        // Generate a unique 6-character code
+        // Generate a unique 6-character code using cryptographically secure random
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        var random = new Random();
         string code;
         
         do
         {
-            code = new string(Enumerable.Repeat(chars, 6)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
+            var bytes = new byte[6];
+            using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(bytes);
+            }
+            
+            code = new string(bytes.Select(b => chars[b % chars.Length]).ToArray());
         }
         while (_context.Houses.Any(h => h.HouseCode == code)); // Ensure unique
         
