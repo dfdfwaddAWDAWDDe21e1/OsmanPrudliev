@@ -2,11 +2,34 @@ using HouseApp.ViewModels;
 
 namespace HouseApp.Views;
 
+[QueryProperty(nameof(HouseId), "HouseId")]
 public partial class HouseManagementPage : ContentPage
 {
+    private readonly HouseManagementViewModel _viewModel;
+    private int _houseId;
+
+    public int HouseId
+    {
+        get => _houseId;
+        set
+        {
+            _houseId = value;
+            if (_viewModel != null)
+            {
+                _viewModel.HouseId = value;
+                _viewModel.IsEditMode = value > 0;
+                if (value > 0)
+                {
+                    _ = _viewModel.LoadHouseDetailsCommand.ExecuteAsync(null);
+                }
+            }
+        }
+    }
+
     public HouseManagementPage(HouseManagementViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = viewModel;
+        _viewModel = viewModel;
+        BindingContext = _viewModel;
     }
 }
